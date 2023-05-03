@@ -4,11 +4,24 @@ May 03rd 2023
 
 Debora
 1. What I have done / not done since last Scrum?
+Done
+-Setup MySQL Workbench to access AWS database
+-Correct URL list and User case diagram to proposal
+-Setup Trello
+-Setup GitHub
 2. What I plan to do from this scrum to next? (next 24 hours)
+- Share tasks to start coding
 3. Where do I need assistance? What do I need to figure out?
+
 
 
 Matt
-1. What I have done / not done since last Scrum?
-2. What I plan to do from this scrum to next? (next 24 hours)
-3. Where do I need assistance? What do I need to figure out?
+1. Done/Not done since last Scrum:
+- Created remote database
+- Finalized proposal
+2. To do until next Scrum:
+- Divvy tasks
+- Begin working on templates and entities.
+3. Need assistance / figure things out
+- Sort out SQL error
+
