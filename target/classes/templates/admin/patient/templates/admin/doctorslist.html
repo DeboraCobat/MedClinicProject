@@ -13,7 +13,7 @@
 
 <body>
 
-<!-- Navigation bar -->
+<!-- Navigation bar ------------------------------------>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a class="navbar-brand" href="#">Logo</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -46,38 +46,48 @@
     </ul>
 </nav>
 
-<!-- Body -->
+<!-- Body ------------------------------------>
 <div class="container my-4">
     <div class="row mb-3">
         <div class="col-md-8">
             <input type="text" class="form-control" placeholder="Search">
         </div>
         <div class="col-md-4 text-right">
-            <button type="button" class="btn btn-primary">Add Doctor</button>
+            <button type="button" class="btn btn-primary">+ New Doctor</button>
         </div>
     </div>
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
             <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Email</th>
                 <th>Specialty</th>
-                <th>Doctor's Name</th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
-            <!-- Use Thymeleaf to loop through doctors and display in table rows -->
             <tr th:each="doctor : ${doctors}">
+                <td th:text="${doctor.id}"></td>
+                <td th:text="${doctor.firstName}"></td>
+                <td th:text="${doctor.lastName}"></td>
+                <td th:text="${doctor.dateOfBirth}"></td>
+                <td th:text="${doctor.gender}"></td>
+                <td th:text="${doctor.address}"></td>
+                <td th:text="${doctor.phoneNumber}"></td>
+                <td th:text="${doctor.email}"></td>
                 <td th:text="${doctor.specialty}"></td>
-                <td th:text="${doctor.name}"></td>
-                <td>
-                    <a href="#" class="          btn btn-sm btn-primary">Edit</a>
-                </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <!-- Pagination links -->
+
+    <!-- Pagination links
     <div th:if="${hasNextPage}" class="my-3">
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
@@ -87,7 +97,6 @@
                 <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled' : ''">
                     <a class="page-link" th:href="@{${pageURL}(page=${currentPage-1}, size=${pageSize})}">&lsaquo;</a>
                 </li>
-                <!-- Loop through pages and display page numbers -->
                 <li th:each="page : ${#numbers.sequence(1, totalPages)}" th:classappend="${page == currentPage} ? 'active' : ''">
                     <a class="page-link" th:href="@{${pageURL}(page=${page}, size=${pageSize})}" th:text="${page}"></a>
                 </li>
@@ -99,7 +108,7 @@
                 </li>
             </ul>
         </nav>
-    </div>
+    </div>------------------------------------>
 </div>
 </body>
 </html>
