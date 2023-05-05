@@ -1,9 +1,12 @@
 package teamproject.medclinic.controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import teamproject.medclinic.entity.Appointments;
+import teamproject.medclinic.entity.Users;
 import teamproject.medclinic.repository.AppointmentRepo;
 
 import java.util.List;
@@ -23,14 +26,17 @@ public class AppointmentsController {
         model.addAttribute("appointments", appointments);
         return "admin/appointmentsList";
     }
-
+}
  // Create Operation (HTTP POST)
 
-//    @PostMapping
-//    public ResponseEntity<Users> createDoctor(@RequestBody Users doctor) {
+//    @RequestMapping(value = "/admin/appointmentCreate", method = RequestMethod.GET)
+//    public String appointmentCreate() {
+//        return "admin/appointmentCreate";
+//    }
+//
+//    @PostMapping("/admin/appointmentCreate")
+//    public ResponseEntity<Users> appointmentCreate(@RequestBody Users doctor) {
 //        doctor.setRole(Users.Role.doctor);
 //        Users savedDoctor = userRepo.save(doctor);
 //        return ResponseEntity.status(HttpStatus.CREATED).body(savedDoctor);
 //    }
-
-}

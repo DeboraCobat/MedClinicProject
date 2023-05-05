@@ -1,8 +1,10 @@
 package teamproject.medclinic.controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import teamproject.medclinic.entity.Users;
 import teamproject.medclinic.repository.UserRepo;
 
@@ -24,4 +26,17 @@ public class PatientController {
         return "admin/patientsList";
     }
 
+
+    // Create Operatio (HTTP Post)
+    @RequestMapping(value = "/admin/patientCreate", method = RequestMethod.GET)
+    public String patientCreate() {
+        return "admin/patientCreate";
+    }
+
+    @PostMapping("/admin/patientCreate")
+    public ResponseEntity<Users> patientCreate(@RequestBody Users patient) {
+        patient.setRole(Users.Role.patient);
+        Users savedPatient = userRepo.save(patient);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedPatient);
+    }
 }
