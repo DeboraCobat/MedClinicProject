@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 
 @Entity
@@ -18,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,7 +49,11 @@ public class Users {
     @Email
     private String email;
 
+    @NotBlank
+    private String password;
+
     private String specialty;
+
 
     public enum Role {
         patient, doctor, admin
@@ -59,4 +62,6 @@ public class Users {
     public enum Gender {
         male, female, other
     }
+
 }
+

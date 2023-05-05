@@ -21,13 +21,11 @@ public class Appointments {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
-    @Enumerated(EnumType.STRING)
-    private Users patient;
+    private User patient;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
-    @Enumerated(EnumType.STRING)
-    private Users doctor;
+    private User doctor;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date appointmentTime;

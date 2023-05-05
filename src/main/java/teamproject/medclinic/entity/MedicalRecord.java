@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class MedicalRecords {
+public class MedicalRecord {
 
     @Id
     @GeneratedValue
@@ -20,7 +20,7 @@ public class MedicalRecords {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
-    private Users patient;
+    private User patient;
 
     private String document_path;
 }
