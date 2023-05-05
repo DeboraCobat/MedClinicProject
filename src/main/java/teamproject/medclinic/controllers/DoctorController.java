@@ -17,11 +17,11 @@ public class DoctorController {
         this.userRepo = userRepo;
     }
 
-    @GetMapping("/doctorsList")
+    @GetMapping("/admin/doctorsList")
     public String doctorsList(Model model) {
         List<Users> doctors = userRepo.findByRole(Users.Role.doctor);
         model.addAttribute("doctors", doctors);
-        return "doctorsList";
+        return "admin/doctorsList";
     }
 
 }
