@@ -39,7 +39,7 @@ Matt
 3. Need Assistance/figure things out
 -
 
-Debora
+Debora 
 1. What I have done / not done since last Scrum?
 Done
 -Setup MySQL Workbench to access AWS database
@@ -52,12 +52,23 @@ Start on  Templates
 
 May 5th 2023
 
-Debora
+Matt
+1. Done/not done since Last Scrum:
+- Creation of templates
+- Connected to database
+2. To do until next Scrum:
+- Crud users
+- Register users
+3. Need Assistance/figure things out
+-
+
+
+Debora 
 1. What I have done / not done since last Scrum?
 Done
--Setup MySQL Workbench to access AWS database
-Started CRUD to doctors
-Start on  Templates
+- list to DOCTORS APPTMNT PATIENT
+- ADD EDIT DELETE DOCTORS APPTMNT PATIENT
 2. What I plan to do from this scrum to next? (next 24 hours)
-- finish doctors crud and replicate
+-  ADD EDIT DELETE DOCTORS APPTMNT PATIENT
+- SEARCH FUNCTIONALITY
 3. Where do I need assistance? What do I need to figure out?
