@@ -21,13 +21,17 @@ public class Appointments {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    @Enumerated(EnumType.STRING)
     private Users patient;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
+    @Enumerated(EnumType.STRING)
     private Users doctor;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date appointmentTime;
 
+    @Column(columnDefinition = "TEXT")
     private String notes;
 }

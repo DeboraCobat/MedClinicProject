@@ -2,6 +2,8 @@ package teamproject.medclinic.controllers;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ public class DoctorController {
         this.userRepo = userRepo;
     }
 
+    // List ALL Operation (HTTP GET)
     @GetMapping("/admin/doctorsList")
     public String doctorsList(Model model) {
         List<Users> doctors = userRepo.findByRole(Users.Role.doctor);
@@ -24,4 +27,11 @@ public class DoctorController {
         return "admin/doctorsList";
     }
 
+    // Create Operation (HTTP POST)
+    @PostMapping
+    public ResponseEntity<Users> doctorCreate (@RequestBody Users doctor) {
+        doctor.setRole(Users.Role.doctor);
+        Users savedDoctor = userRepo.save(doctor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedDoctor);
+    }
 }
