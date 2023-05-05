@@ -21,11 +21,11 @@ public class Appointments {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
-    private Users patient;
+    private User patient;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
-    private Users doctor;
+    private User doctor;
 
     private Date appointmentTime;
 
