@@ -28,13 +28,13 @@ public class User {
     private Role role;
 
     @NotBlank
-    private String firstName;
+    private String first_name;
 
     @NotBlank
-    private String lastName;
+    private String last_name;
 
     @NotNull
-    private LocalDate dateOfBirth;
+    private LocalDate date_of_birth;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -43,7 +43,7 @@ public class User {
     private String address;
 
     @NotBlank
-    private String phoneNumber;
+    private String phone_number;
 
     @NotBlank
     @Email

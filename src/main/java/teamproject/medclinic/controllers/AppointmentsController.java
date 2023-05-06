@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import teamproject.medclinic.entity.Appointments;
-import teamproject.medclinic.entity.Users;
 import teamproject.medclinic.repository.AppointmentRepo;
 
 import java.util.List;
