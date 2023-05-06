@@ -11,56 +11,58 @@
 </head>
 <body>
 <div class="container my-4">
-    <form method="post">
+    <form method="post" action="/admin/patientCreate">
         <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">Name:</label>
+            <label for="first_name" class="col-sm-2 col-form-label">First Name:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="name" id="name">
+                <input type="text" class="form-control" name="first_name" id="first_name" required>
             </div>
         </div>
         <div class="form-group row">
-            <label for="dob" class="col-sm-2 col-form-label">DOB:</label>
+            <label for="last_name" class="col-sm-2 col-form-label">Last Name:</label>
             <div class="col-sm-10">
-                <input type="date" class="form-control" name="dob" id="dob">
+                <input type="text" class="form-control" name="last_name" id="last_name" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="date_of_birth" class="col-sm-2 col-form-label">Date of Birth:</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" required>
             </div>
         </div>
         <div class="form-group row">
             <label for="gender" class="col-sm-2 col-form-label">Gender:</label>
             <div class="col-sm-10">
-                <select class="form-control" name="gender" id="gender">
-                    <option value="MALE">Male</option>
-                    <option value="FEMALE">Female</option>
+                <select class="form-control" name="gender" id="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
                 </select>
             </div>
         </div>
         <div class="form-group row">
             <label for="address" class="col-sm-2 col-form-label">Address:</label>
             <div class="col-sm-10">
-                <textarea class="form-control" name="address" id="address"></textarea>
+                <textarea class="form-control" name="address" id="address" required></textarea>
             </div>
         </div>
         <div class="form-group row">
-            <label for="phone" class="col-sm-2 col-form-label">Phone:</label>
+            <label for="phone_number" class="col-sm-2 col-form-label">Phone:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="phone" id="phone">
+                <input type="text" class="form-control" name="phone_number" id="phone_number" required>
             </div>
         </div>
         <div class="form-group row">
             <label for="email" class="col-sm-2 col-form-label">Email:</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" name="email" id="email">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="specialty" class="col-sm-2 col-form-label">Specialty:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="specialty" id="specialty">
+                <input type="email" class="form-control" name="email" id="email" required>
             </div>
         </div>
         <div class="form-group row">
             <div class="col-sm-2"></div>
             <div class="col-sm-10">
-                <input type="submit" class="btn btn-primary" value="Create">
+                <button type="submit" class="btn btn-primary">Add New Patient</button>
             </div>
         </div>
     </form>

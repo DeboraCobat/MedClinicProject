@@ -30,24 +30,7 @@ public class DoctorController {
         return "admin/doctorsList";
     }
 
-//    // Create Operation (HTTP POST)
-//    @GetMapping("/admin/doctorCreate")
-//    public String doctorCreateForm() {
-//        return "admin/doctorCreate";
-//    }
-//
-//    @PostMapping("/admin/doctorCreate")
-//    public ResponseEntity<User> doctorCreate(@RequestBody User doctor) {
-//        doctor.setRole(User.Role.doctor);
-//        User savedDoctor = userRepo.save(doctor);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(savedDoctor);
-//    }
-//
-//    @ExceptionHandler(IOException.class)
-//    public ResponseEntity<String> handleIOException(IOException e) {
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request body");
-//    }
-//}
+    // Create Operation (HTTP POST)
     @RequestMapping("/admin/doctorCreate")
     public String doctorCreate(Model model) {
         User user = new User();
@@ -62,4 +45,13 @@ public class DoctorController {
         userRepo.save(user);
         return "redirect:/admin/doctorsList";
     }
+
+    @RequestMapping("/admin/doctorUpdate")
+    public String doctorUpdate(Model model) {
+        User user = new User();
+        user.setRole(User.Role.doctor);
+        model.addAttribute("user", user);
+        return "admin/doctorUpdate";
+    }
 }
+
