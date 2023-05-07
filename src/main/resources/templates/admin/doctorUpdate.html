@@ -4,73 +4,93 @@
     <title>Update Doctor</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 </head>
+
 <body>
+
+<!-- Navigation bar ------------------------------------>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="/admin/dashboard">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/doctorsList">Doctors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/appointmentsList">Appointments</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/patientsList">Patients</a>
+            </li>
+        </ul>
+    </div>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                Hello, [[${username}]]!
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">View Profile</a>
+                <a class="dropdown-item" href="#">Log Out</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+
 <div class="container my-4">
-    <form method="post" action="/admin/doctorCreate">
-        <div class="form-group row">
-            <label for="first_name" class="col-sm-2 col-form-label">First Name:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="first_name" id="first_name" required>
-            </div>
+
+    <h1 class="text-center">Update Doctor Information</h1>
+
+    <form th:action="@{/doctorUpdate/{id}(id=${user.id})}" th:object="${user}" method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" class="form-control" id="firstName" th:field="*{firstName}"/>
         </div>
-        <div class="form-group row">
-            <label for="last_name" class="col-sm-2 col-form-label">Last Name:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="last_name" id="last_name" required>
-            </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" th:field="*{lastName}"/>
         </div>
-        <div class="form-group row">
-            <label for="date_of_birth" class="col-sm-2 col-form-label">Date of Birth:</label>
-            <div class="col-sm-10">
-                <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" required>
-            </div>
+
+        <div class="form-group">
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" class="form-control" id="dateOfBirth" th:field="*{dateOfBirth}"/>
         </div>
-        <div class="form-group row">
-            <label for="gender" class="col-sm-2 col-form-label">Gender:</label>
-            <div class="col-sm-10">
-                <select class="form-control" name="gender" id="gender" required>
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" class="form-control" id="address" th:field="*{address}"/>
         </div>
-        <div class="form-group row">
-            <label for="address" class="col-sm-2 col-form-label">Address:</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" name="address" id="address" required></textarea>
-            </div>
+
+        <div class="form-group">
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}"/>
         </div>
-        <div class="form-group row">
-            <label for="phone_number" class="col-sm-2 col-form-label">Phone:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="phone_number" id="phone_number" required>
-            </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}"/>
         </div>
-        <div class="form-group row">
-            <label for="email" class="col-sm-2 col-form-label">Email:</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" name="email" id="email" required>
-            </div>
+
+        <div class="form-group">
+            <label for="specialty">Specialty:</label>
+            <input type="text" class="form-control" id="specialty" th:field="*{specialty}"/>
         </div>
-        <div class="form-group row">
-            <label for="specialty" class="col-sm-2 col-form-label">Specialty:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="specialty" id="specialty" required>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Create New Doctor</button>
-            </div>
-        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-danger" name="_method" value="DELETE">Delete</button>
+
     </form>
 </div>
 </body>
+</html>

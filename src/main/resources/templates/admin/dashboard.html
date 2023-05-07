@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <style>
+    .centered {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .btn-lg {
+      width: 200px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+<!-- Navigation bar ------------------------------------>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a class="navbar-brand" href="#">Logo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
+        <!--        <img src="[avatar-url]" alt="Avatar" style="width: 25px; height: 25px; border-radius: 50%;">-->
+        Hello, [[${username}]]!
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="#">View Profile</a>
+        <a class="dropdown-item" href="#">Log Out</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<!--<div>-->
+<!--<h3> Welcome to the Medical Clinic Administrator's Workspace </h3>-->
+<!--</div>-->
+
+<div class="centered">
+
+  <a href="/admin/doctorsList" class="btn btn-primary btn-lg">Doctors</a>
+  <a href="/admin/appointmentsList" class="btn btn-primary btn-lg">Appointments</a>
+  <a href="/admin/patientsList" class="btn btn-primary btn-lg">Patients</a>
+</div>
+
+</body>
+</html>

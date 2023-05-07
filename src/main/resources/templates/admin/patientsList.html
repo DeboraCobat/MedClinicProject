@@ -15,7 +15,7 @@
 
 <!-- Navigation bar ------------------------------------>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">Logo</a>
+    <a class="navbar-brand" href="/admin/dashboard">Logo</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -47,66 +47,67 @@
 </nav>
 
 <!--<&#45;&#45; Body &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
-    <div class="container my-4">
-        <div class="row mb-3">
-            <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <div class="col-md-4 text-right">
-                <a th:href="@{/admin/patientCreate}" class="btn btn-primary">+ New Patient</a>
-            </div>            </div>
+<h1 style="margin-left: 25px; margin-top: 25px"> Patients </h1>
+<div class="container my-4">
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <input type="text" class="form-control" placeholder="Search">
         </div>
-    <div class="table-responsive">
+        <div class="col-md-4 text-right">
+            <a th:href="@{/admin/patientCreate}" class="btn btn-primary">+ New Patient</a>
+        </div>            </div>
+</div>
+<div class="table-responsive">
     <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>DOB</th>
-                <th>Gender</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Email</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="patient : ${patients}">
-                <td th:text="${patient .id}"></td>
-                <td th:text="${patient .first_name} + ' ' + ${patient .last_name}"></td>
-                <td th:text="${patient .date_of_birth}"></td>
-                <td th:text="${patient .gender}"></td>
-                <td th:text="${patient .address}"></td>
-                <td th:text="${patient .phone_number}"></td>
-                <td th:text="${patient .email}"></td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>DOB</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${patients}">
+            <td th:text="${patient .id}"></td>
+            <td th:text="${patient .firstName} + ' ' + ${patient .lastName}"></td>
+            <td th:text="${patient .dateOfBirth}"></td>
+            <td th:text="${patient .gender}"></td>
+            <td th:text="${patient .address}"></td>
+            <td th:text="${patient .phoneNumber}"></td>
+            <td th:text="${patient .email}"></td>
+            <td>
+                <a href="#" class="btn btn-sm btn-primary">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <!--    &lt;!&ndash; Add Doctor Form &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
-    <!-- Pagination links
-    <<div th:if="${hasNextPage}" class="my-3">
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" th:href="@{${pageURL}(page=1, size=${pageSize})}">&laquo;</a>
-            </li>
-            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled' : ''">
-                <a class="page-link" th:href="@{${pageURL}(page=${currentPage-1}, size=${pageSize})}">&lsaquo;</a>
-            </li>
-            <li th:each="page : ${#numbers.sequence(1, totalPages)}" th:classappend="${page == currentPage} ? 'active' : ''">
-                <a class="page-link" th:href="@{${pageURL}(page=${page}, size=${pageSize})}" th:text="${page}"></a>
-            </li>
-            <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled' : ''">
-                <a class="page-link" th:href="@{${pageURL}(page=${currentPage+1}, size=${pageSize})}">&rsaquo;</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" th:href="@{${pageURL}(page=${totalPages}, size=${pageSize})}">&raquo;</a>
-            </li>
-        </ul>
-    </nav>
+<!-- Pagination links
+<<div th:if="${hasNextPage}" class="my-3">
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" th:href="@{${pageURL}(page=1, size=${pageSize})}">&laquo;</a>
+        </li>
+        <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled' : ''">
+            <a class="page-link" th:href="@{${pageURL}(page=${currentPage-1}, size=${pageSize})}">&lsaquo;</a>
+        </li>
+        <li th:each="page : ${#numbers.sequence(1, totalPages)}" th:classappend="${page == currentPage} ? 'active' : ''">
+            <a class="page-link" th:href="@{${pageURL}(page=${page}, size=${pageSize})}" th:text="${page}"></a>
+        </li>
+        <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled' : ''">
+            <a class="page-link" th:href="@{${pageURL}(page=${currentPage+1}, size=${pageSize})}">&rsaquo;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" th:href="@{${pageURL}(page=${totalPages}, size=${pageSize})}">&raquo;</a>
+        </li>
+    </ul>
+</nav>
 </div>
 ------------------------------------>
 <!--</div>-->
