@@ -18,6 +18,7 @@ public class AppointmentsController {
         this.appointmentRepo = appointmentRepo;
     }
 
+
     // List ALL Operation (HTTP GET)
     @GetMapping("/admin/appointmentsList")
     public String appointmentsList(Model model) {
