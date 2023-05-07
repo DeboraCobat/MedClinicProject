@@ -72,3 +72,37 @@ Done
 -  ADD EDIT DELETE DOCTORS APPTMNT PATIENT
 - SEARCH FUNCTIONALITY
 3. Where do I need assistance? What do I need to figure out?
+
+
+May 7th 2023
+
+Matt
+1. Done / not done since last scrum:
+- Done: Creation of user templates(register/login/logout/profile/editOrDeleteProfile)
+- Done: User register/login/logout/profile/editProfile page
+- Done: Validations added to the login page.
+- Not done: Delete profile.
+- Not done: Complete CRUM for users.
+- Not done: Validations for register page.
+- Not done: Appointment page for users, finish CRUM.
+2. To do until next Scrum:
+- Finish for CRUM users along with proper validations.
+- Begin and finish CRUM user appointments along with validations.
+- Begin on designing/improving the front end appearance.
+- Experiment with calendars and link them with appointments/patients/doctors.
+3. Need assistance / figure things out
+
+
+Debora
+1. Done / not done since last scrum:
+- Done: Create for Doctors and Patients Running
+- Done: Delete for Doctors and Patients Running
+- Done: API Update running
+- Not done:Update functional on browser
+2. To do until next Scrum:
+- Finish  UPDATE to Doctors and Patients
+- Finish appoitments CRUD
+- Experiment with calendars and link them with appointments/patients/doctors.
+3. Need assistance / figure things out
+
+- Finish UPDATE to Doctors and Patients
