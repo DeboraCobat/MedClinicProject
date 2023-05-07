@@ -37,6 +37,7 @@ public class UserController {
 
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user) {
+        user.setRole(User.Role.patient);
         userRepo.save(user);
         return "redirect:/";
     }
@@ -51,6 +52,11 @@ public class UserController {
                         @RequestParam("password") String password,
                         HttpSession session,
                         Model model) {
+        if (email == null || password == null) {
+            model.addAttribute("errorLogin", "Please provide both email and password");
+            return "login";
+        }
+
         User user = userRepo.findByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("user", user);
@@ -60,4 +66,22 @@ public class UserController {
             return "login";
         }
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            model.addAttribute("error", "You are not logged in");
+            return "login";
+        }
+        model.addAttribute("user", user);
+        return "profile";
+    }
+
 }
