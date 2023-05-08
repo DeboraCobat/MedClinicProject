@@ -45,8 +45,7 @@
 </nav>
 
 <div class="container my-4">
-    <h1 class="text-center">Update Doctor Information</h1>
-    <form method="post" th:action="@{/admin/doctorUpdate/{id}(id=${user.id})}" th:object="${user}">
+    <form th:action="@{/admin/doctorUpdate/{id}(id=${user.id})}" th:object="${user}" method="post">
         <input type="hidden" th:field="*{id}"/>
         <div class="form-group">
             <label for="firstName">First Name:</label>
@@ -76,11 +75,14 @@
             <label for="specialty">Specialty:</label>
             <input type="text" class="form-control" id="specialty" th:field="*{specialty}"/>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-        <form th:action="@{/admin/deleteDoctor/{id}(id=${user.id}, source='doctor')}" method="get">
-            <input type="hidden" name="_method" value="delete">
-            <button type="submit" class="btn btn-danger">Delete</button>
+        <form th:action="@{/admin/docUpdate/{id}(id=${user.id})}" method="post" th:object="${user}">
+            <button type="submit" class="btn btn-primary">Update</button>
         </form>
+        </br>
+    <form th:action="@{/admin/doctorDelete/{id}(id=${user.id}, source='doctor')}" method="get">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
     </form>
 </div>
 </body>

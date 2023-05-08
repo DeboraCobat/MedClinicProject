@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>List of Doctors</title>
     <meta charset="UTF-8">
@@ -51,7 +51,14 @@
 <div class="container my-4">
     <div class="row mb-3">
         <div class="col-md-8">
-            <input type="text" class="form-control" placeholder="Search">
+<!--            <input type="text" class="form-control" placeholder="Search">-->
+            <form th:action="@{/users/search}" method="get">
+                <label>
+                    <input type="text" name="query" placeholder="Search doctors...">
+                </label>
+                <button type="submit">Search</button>
+            </form>
+
         </div>
         <div class="col-md-4 text-right">
             <a th:href="@{/admin/doctorCreate}" class="btn btn-primary">+ New Doctor</a>
@@ -76,17 +83,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="doctor : ${doctors}">
-            <td th:text="${doctor.id}"></td>
-            <td th:text="${doctor.firstName} + ' ' + ${doctor.lastName}"></td>
-            <td th:text="${doctor.dateOfBirth}"></td>
-            <td th:text="${doctor.gender}"></td>
-            <td th:text="${doctor.address}"></td>
-            <td th:text="${doctor.phoneNumber}"></td>
-            <td th:text="${doctor.email}"></td>
-            <td th:text="${doctor.specialty}"></td>
+        <tr th:each="user : ${doctors}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+            <td th:text="${user.dateOfBirth}"></td>
+            <td th:text="${user.gender}"></td>
+            <td th:text="${user.address}"></td>
+            <td th:text="${user.phoneNumber}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.specialty}"></td>
             <td>
-                <a href="@{/admin/doctorUpdate/{id}(id=${doctor.id})}" class="btn btn-sm btn-primary">Edit</a>
+                <a th:href="@{/admin/doctorUpdate/{id}(id=${user.id})}" class="btn btn-sm btn-primary">Edit</a>
             </td>
         </tr>
         </tbody>

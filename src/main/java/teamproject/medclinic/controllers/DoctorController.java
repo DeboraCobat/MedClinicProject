@@ -1,84 +1,116 @@
 package teamproject.medclinic.controllers;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
-import java.lang.IllegalArgumentException;
+import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.web.servlet.ModelAndView;
 import teamproject.medclinic.entity.Appointments;
+import teamproject.medclinic.entity.MedicalRecord;
 import teamproject.medclinic.entity.User;
+import teamproject.medclinic.repository.AppointmentRepo;
+import teamproject.medclinic.repository.MedicalRecordRepo;
 import teamproject.medclinic.repository.UserRepo;
 
 @Controller
+@RequestMapping("/doctor")
 public class DoctorController {
+
     private final UserRepo userRepo;
+    private final MedicalRecordRepo medicalRecordRepo;
+    private final AppointmentRepo appointmentRepo;
 
-    public DoctorController(UserRepo userRepo) {
+    public DoctorController(UserRepo userRepo, MedicalRecordRepo medicalRecordRepo,
+                            AppointmentRepo appointmentRepo) {
         this.userRepo = userRepo;
+        this.medicalRecordRepo = medicalRecordRepo;
+        this.appointmentRepo = appointmentRepo;
     }
 
-    //// DOCTOR CRUD ////
+    /// Patient Controllers ////
 
-    // List ALL Operation
-    @GetMapping("/admin/doctorsList")
-    public String doctorsList(Model model) {
-        List<User> doctors = userRepo.findByRole(User.Role.doctor);
-        model.addAttribute("doctors", doctors);
-        return "admin/doctorsList";
+    //All list ( need to work id  doctor relation)
+    @GetMapping("/patient/patientsList")
+    public ResponseEntity<List<User>> getPatients() {
+        List<User> patients = userRepo.findByRole(User.Role.patient);
+        return new ResponseEntity<>(patients, HttpStatus.OK);
     }
 
-    // Create Operation
-    @RequestMapping("/admin/doctorCreate")
-    public String doctorCreate(Model model) {
-        User user = new User();
-        user.setRole(User.Role.doctor);
-        model.addAttribute("user", user);
-        return "admin/doctorCreate";
+    //Specific patient Info
+    @GetMapping("/patient/patientInfo/{id}")
+    public ResponseEntity<User> getPatient(@PathVariable Long id) {
+        Optional<User> optionalPatient = userRepo.findById(id);
+        if (optionalPatient.isPresent()) {
+            User patient = optionalPatient.get();
+            if (patient.getRole() == User.Role.patient) {
+                return new ResponseEntity<>(patient, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/admin/doctorCreate")
-    public String doctorCreate(@ModelAttribute("user") User user) {
-        user.setRole(User.Role.doctor);
-        userRepo.save(user);
-        return "redirect:/admin/doctorsList";
-    }
+    //Upload record file to specific patient
+    @PutMapping("/patient/{id}/medicalRecordUpload")
+    public ResponseEntity<MedicalRecord> uploadMedicalRecord(@PathVariable Long id,
+                                                             @RequestParam("file") MultipartFile file) throws IOException {
+        Optional<User> optionalPatient = userRepo.findById(id);
+        if (optionalPatient.isPresent()) {
+            User patient = optionalPatient.get();
+            if (patient.getRole() == User.Role.patient) {
+                MedicalRecord record = new MedicalRecord();
+                record.setPatient(patient);
+                record.setDocumentPath(file.getOriginalFilename());
+                medicalRecordRepo.save(record);
 
-    // Update Operation
-    @GetMapping("/admin/doctorUpdate/{id}")
-    public String doctorUpdate(@PathVariable("id") Long id, Model model) {
-        User user = userRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        model.addAttribute("user", user);
-        return "admin/doctorUpdate";
-    }
+                String directory = "/path/to/save/files/" + patient.getId();
+                File fileToSave = new File(directory, file.getOriginalFilename());
+                file.transferTo(fileToSave);
 
-    @PutMapping("/admin/updateDoctor/{id}")
-    public String updateDoctor(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
-        User existingDoctor = userRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        existingDoctor.setFirstName(user.getFirstName());
-        existingDoctor.setLastName(user.getLastName());
-        existingDoctor.setDateOfBirth(user.getDateOfBirth());
-        existingDoctor.setAddress(user.getAddress());
-        existingDoctor.setPhoneNumber(user.getPhoneNumber());
-        existingDoctor.setEmail(user.getEmail());
-        existingDoctor.setSpecialty(user.getSpecialty());
-
-        userRepo.save(existingDoctor);
-
-        return "redirect:/admin/doctorsList";
-    }
-
-
-    // DOCTOR Delete Operation
-    @RequestMapping ("/admin/doctorDelete/{id}")
-    public String doctorDelete(@PathVariable("id") Long id) {
-        User user = userRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
-        userRepo.delete(user);
-        return "redirect:/admin/doctorsList";
+                return new ResponseEntity<>(record, HttpStatus.CREATED);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
+
+//    }
+//
+//    //Display specific patient records ///
+//    @GetMapping("/patient/{id}/medicalRecord")
+//    public ModelAndView getMedicalRecords(@PathVariable Long id) {
+//        Optional<User> optionalPatient = userRepo.findById(id);
+//        if (optionalPatient.isPresent()) {
+//            User patient = optionalPatient.get();
+//            if (patient.getRole() == User.Role.patient) {
+//                List<MedicalRecord> records = medicalRecordRepo.findByPatient(patient);
+//                ModelAndView modelAndView = new ModelAndView("medicalRecord");
+//                modelAndView.addObject("records", records);
+//                return modelAndView;
+//            }
+//        }
+//        return new ModelAndView("error/404");
+//    }
+//
+//
+//    /// Appointments Controllers ////
+//    @GetMapping("/patient/{id}/appointment")
+//    public ResponseEntity<List<Appointments>> getAppointments(@PathVariable Long id) {
+//        Optional<User> optionalPatient = userRepo.findById(id);
+//        if (optionalPatient.isPresent()) {
+//            User patient = optionalPatient.get();
+//            if (patient.getRole() == User.Role.patient) {
+//                List<Appointments> appointments = appointmentRepo.findByPatient(patient);
+//                return new ResponseEntity<>(appointments, HttpStatus.OK);
+//            }
+//        }
+//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }
+//}

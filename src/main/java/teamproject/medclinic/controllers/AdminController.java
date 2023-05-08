@@ -135,11 +135,10 @@ public class AdminController {
         existingPatient.setAddress(user.getAddress());
         existingPatient.setPhoneNumber(user.getPhoneNumber());
         existingPatient.setEmail(user.getEmail());
-        existingPatient.setSpecialty(user.getSpecialty());
-
         userRepo.save(existingPatient);
 
         return "redirect:/admin/patientsList";
+
     }
     // PATIENT Delete Operation
     @RequestMapping ("/patientDelete/{id}")
