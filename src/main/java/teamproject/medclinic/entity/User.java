@@ -10,6 +10,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.security.auth.kerberos.KerberosTicket;
+import java.lang.management.RuntimeMXBean;
+import java.time.Duration;
 import java.time.LocalDate;
 
 @Entity
@@ -57,7 +60,6 @@ public class User {
     private String password;
 
     private String specialty;
-
 
     public enum Role {
         patient, doctor, admin

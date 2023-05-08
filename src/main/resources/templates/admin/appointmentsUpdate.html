@@ -9,5 +9,12 @@
 </head>
 <body>
 
+
+<form th:action="@{/admin/deleteUser/{id}(id=${user.id})}" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="hidden" name="source" value="appointment">
+    <button type="submit">Delete</button>
+</form>
+
 </body>
 </html>

@@ -54,7 +54,9 @@
             <input type="text" class="form-control" placeholder="Search">
         </div>
         <div class="col-md-4 text-right">
-            <a th:href="@{/admin/doctorCreate}" class="btn btn-primary">+ New Doctor</a>
+            <a th:href="@{/admin/doctorCreate}" class="btn btn-success">Create New Doctor</a>
+            <!--            <a th:href="@{/admin/doctorCreate}" class="btn btn-success">Create New Doctor</a>-->
+
         </div>
     </div>
 </div>
@@ -90,10 +92,14 @@
                     <td>
                         <a th:href="@{/admin/doctorUpdate/{id}(id=${doctor.id})}"
                            class="btn btn-sm btn-primary">Edit</a>
+                        <!--                        <a th:href="@{|/admin/doctorUpdate/${user.id}|}" class="btn btn-primary">Update Doctor</a>-->
+
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+    </table>
+</div>
 </body>
 </html>
