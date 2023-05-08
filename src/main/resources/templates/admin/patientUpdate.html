@@ -74,7 +74,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
-        <form th:action="@{/admin/deleteUser/{id}(id=${user.id}, source='patient')}" method="post">
+        <form th:action="@{/admin/deletePatient/{id}(id=${user.id}, source='patient')}" method="post">
             <input type="hidden" name="_method" value="delete">
             <button type="submit" class="btn btn-danger">Delete Patient</button>
         </form>
