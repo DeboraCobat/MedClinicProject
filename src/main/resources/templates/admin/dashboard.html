@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <!-- Navigation bar ------------------------------------>
@@ -31,16 +32,35 @@
     </ul>
 </nav>
 
-<!--<div>-->
-<!--<h3> Welcome to the Medical Clinic Administrator's Workspace </h3>-->
+<!--<div class="centered d-flex flex-wrap">-->
+<!--    <a href="/admin/doctorsList" class="btn btn-primary">Doctors</a>-->
+<!--    <a href="/admin/appointmentsList" class="btn btn-primary">Appointments</a>-->
+<!--    <a href="/admin/patientsList" class="btn btn-primary">Patients</a>-->
 <!--</div>-->
 
-<div class="centered d-flex flex-wrap">
-    <a href="/admin/doctorsList" class="btn btn-primary">Doctors</a>
-    <a href="/admin/appointmentsList" class="btn btn-primary">Appointments</a>
-    <a href="/admin/patientsList" class="btn btn-primary">Patients</a>
-</div>
 
+<!-- Slider Start -->
+<section class="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="feature-block d-lg-flex">
+                    <div class="feature-item mb-5 mb-lg-0">
+                        <a href="/admin/doctorsList" class="btn btn-main btn-round-full">Doctors</a>
+                    </div>
+
+                    <div class="feature-item mb-5 mb-lg-0">
+                        <a href="/admin/appointmentsList" class="btn btn-main btn-round-full">Appointments</a>
+                    </div>
+
+                    <div class="feature-item mb-10 mb-lg-0">
+                        <a href="/admin/patientsList" class="btn btn-main btn-round-full">Patients</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 </body>
 </html>

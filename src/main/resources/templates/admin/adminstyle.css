@@ -9,54 +9,83 @@ body {
     font-family: var(--font-primary);
 }
 
-.btn {
-    background-color: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 1.2rem;
-    padding: 12px 24px;
-    font-family: var(--font-primary);
+/*.btn {*/
+/*    background-color: transparent;*/
+/*    border: 2px solid var(--primary-color);*/
+/*    color: var(--primary-color);*/
+/*    font-weight: bold;*/
+/*    text-transform: uppercase;*/
+/*    letter-spacing: 2px;*/
+/*    font-size: 1.2rem;*/
+/*    padding: 12px 24px;*/
+/*    font-family: var(--font-primary);*/
+/*}*/
+
+/*.btn:hover {*/
+/*    background-color: var(--primary-color);*/
+/*    color: #fff;*/
+/*    transition: all 0.3s ease-in-out;*/
+/*}*/
+
+/*.btn-link {*/
+/*    background: none;*/
+/*    border: none;*/
+/*    padding: 0;*/
+/*    font-size: 1rem;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*.btn-link:hover {*/
+/*    text-decoration: underline;*/
+/*}*/
+
+/*.centered {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh;*/
+/*}*/
+
+/*.btn-line {*/
+/*    background: none;*/
+/*    border: none;*/
+/*    border-bottom: 2px solid black;*/
+/*    padding: 0;*/
+/*    margin-right: 1rem; !* add some space between the buttons *!*/
+/*    font-size: 1rem;*/
+/*}*/
+
+/*.btn-line:last-child {*/
+/*    margin-right: 0; !* remove the margin from the last button *!*/
+/*}*/
+
+.features {
+    margin-top: 225px;
 }
 
-.btn:hover {
-    background-color: var(--primary-color);
-    color: #fff;
-    transition: all 0.3s ease-in-out;
+.feature-item {
+    flex-basis: 33.33%;
+    margin: 0px 10px;
+    padding: 40px 30px;
+    background-color: #fff;
+    border-radius: 15px 15px 15px 15px;
+    box-shadow: 0px 0px 30px 0px rgba(0, 42, 106, 0.1);
 }
 
-.btn-link {
-    background: none;
-    border: none;
-    padding: 0;
-    font-size: 1rem;
-    text-decoration: none;
+.feature-item .feature-icon i {
+    font-size: 50px;
+    color: #223a66;
 }
 
-.btn-link:hover {
-    text-decoration: underline;
+.feature-item h4 {
+    color: #223a66;
 }
 
-.centered {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.feature-item p {
+    font-size: 35px;
 }
 
-.btn-line {
-    background: none;
-    border: none;
-    border-bottom: 2px solid black;
-    padding: 0;
-    margin-right: 1rem; /* add some space between the buttons */
-    font-size: 1rem;
+.feature-section.border-top {
+    border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
 }
-
-.btn-line:last-child {
-    margin-right: 0; /* remove the margin from the last button */
-}
-
