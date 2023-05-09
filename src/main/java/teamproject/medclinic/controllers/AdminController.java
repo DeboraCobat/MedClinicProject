@@ -64,7 +64,7 @@ public class AdminController {
         return "admin/doctorUpdate";
     }
 
-    @PostMapping ("/docUpdate/{id}")
+    @PostMapping("/docUpdate/{id}")
     public String docUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         User existingDoctor = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
@@ -82,7 +82,7 @@ public class AdminController {
     }
 
     // DOCTOR Delete Operation
-    @RequestMapping ("/doctorDelete/{id}")
+    @RequestMapping("/doctorDelete/{id}")
     public String doctorDelete(@PathVariable("id") Long id) {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
@@ -125,7 +125,7 @@ public class AdminController {
         return "admin/patientUpdate";
     }
 
-    @PostMapping ("/patUpdate/{id}")
+    @PostMapping("/patUpdate/{id}")
     public String patUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         User existingPatient = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
@@ -140,8 +140,9 @@ public class AdminController {
         return "redirect:/admin/patientsList";
 
     }
+
     // PATIENT Delete Operation
-    @RequestMapping ("/patientDelete/{id}")
+    @RequestMapping("/patientDelete/{id}")
     public String patientDelete(@PathVariable("id") Long id) {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));

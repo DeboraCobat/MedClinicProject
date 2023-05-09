@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
-  <title>Profile Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+    <title>Profile Page</title>
 </head>
 <body>
 
@@ -13,51 +13,51 @@
 <div th:replace="nav.html"></div>
 
 <div class="container mt-4">
-  <div class="row">
-    <div class="col-lg-4">
-      <div class="card">
-        <div class="card-body">
-          <h1 class="card-title"><span th:text="${user.first_name}"></span></h1>
-          <p class="card-text">
-            Last Name: <span th:text="${user.last_name}"></span><br>
-            Date of birth: <span th:text="${user.date_of_birth}"></span><br>
-            Gender: <span th:text="${user.gender}"></span><br>
-            Address: <span th:text="${user.address}"></span><br>
-            Phone Number: <span th:text="${user.phone_number}"></span><br>
-            Email: <span th:text="${user.email}"></span>
-          </p>
-          <button type="button" class="btn btn-primary btn-sm mt-3">
-            Edit Profile
-          </button>
-        </div>
-      </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title"><span th:text="${user.first_name}"></span></h1>
+                    <p class="card-text">
+                        Last Name: <span th:text="${user.last_name}"></span><br>
+                        Date of birth: <span th:text="${user.date_of_birth}"></span><br>
+                        Gender: <span th:text="${user.gender}"></span><br>
+                        Address: <span th:text="${user.address}"></span><br>
+                        Phone Number: <span th:text="${user.phone_number}"></span><br>
+                        Email: <span th:text="${user.email}"></span>
+                    </p>
+                    <button type="button" class="btn btn-primary btn-sm mt-3">
+                        Edit Profile
+                    </button>
+                </div>
+            </div>
 
-      <div class="card mt-4">
-        <div class="card-body">
-          <h1 class="card-title">Appointments</span></h1>
-          <button type="button" class="btn btn-primary btn-sm mt-3 mb-3">
-            Schedule Appointment
-          </button>
-          <p class="card-text">
-            Last Name: <span th:text="${user.last_name}"></span><br>
-            Date of birth: <span th:text="${user.date_of_birth}"></span><br>
-            Gender: <span th:text="${user.gender}"></span><br>
-            Address: <span th:text="${user.address}"></span><br>
-            Phone Number: <span th:text="${user.phone_number}"></span><br>
-            Email: <span th:text="${user.email}"></span>
-          </p>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h1 class="card-title">Appointments</span></h1>
+                    <button type="button" class="btn btn-primary btn-sm mt-3 mb-3">
+                        Schedule Appointment
+                    </button>
+                    <p class="card-text">
+                        Last Name: <span th:text="${user.last_name}"></span><br>
+                        Date of birth: <span th:text="${user.date_of_birth}"></span><br>
+                        Gender: <span th:text="${user.gender}"></span><br>
+                        Address: <span th:text="${user.address}"></span><br>
+                        Phone Number: <span th:text="${user.phone_number}"></span><br>
+                        Email: <span th:text="${user.email}"></span>
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="col-lg-8">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Calendar</h5>
-          <div id="calendar"></div>
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Calendar</h5>
+                    <div id="calendar"></div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 
@@ -71,12 +71,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <script>
-  $(document).ready(function() {
-    $('#calendar').fullCalendar({
-      // Calendar options and configurations
-      // Customize as per your requirements
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
+            // Calendar options and configurations
+            // Customize as per your requirements
+        });
     });
-  });
 </script>
 
 </body>

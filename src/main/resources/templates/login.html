@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
 </head>
 <body>
 
@@ -16,26 +16,26 @@
 <div th:replace="nav.html"></div>
 
 <div class="container mt-4">
-  <h2>Login</h2>
-  <hr/>
-  <form th:action="@{/login}" method="POST">
+    <h2>Login</h2>
+    <hr/>
+    <form th:action="@{/login}" method="POST">
 
-    <input type="email" name="email" placeholder="Enter Email" class="form-control col-4 mb-4"/>
-    <input type="password" name="password" placeholder="Enter Password" class="form-control col-4 mb-4"/>
+        <input type="email" name="email" placeholder="Enter Email" class="form-control col-4 mb-4"/>
+        <input type="password" name="password" placeholder="Enter Password" class="form-control col-4 mb-4"/>
 
 
-    <button type="submit" class="btn btn-primary">Login</button>
-    Don't have an account? Click <a href="/register">here</a>
+        <button type="submit" class="btn btn-primary">Login</button>
+        Don't have an account? Click <a href="/register">here</a>
 
-  </form>
+    </form>
 
-  <div th:if="${errorLogin}" class="alert alert-danger mt-3">
-    <p th:text="${errorLogin}"></p>
-  </div>
+    <div th:if="${errorLogin}" class="alert alert-danger mt-3">
+        <p th:text="${errorLogin}"></p>
+    </div>
 
-  <div th:if="${error}" class="alert alert-danger mt-3">
-    <p th:text="${error}"></p>
-  </div>
+    <div th:if="${error}" class="alert alert-danger mt-3">
+        <p th:text="${error}"></p>
+    </div>
 
 </div>
 
