@@ -13,6 +13,8 @@ import teamproject.medclinic.entity.User;
 import teamproject.medclinic.repository.UserRepo;
 import org.springframework.ui.Model;
 
+import java.security.Principal;
+
 
 @Controller
 public class UserController {
@@ -20,12 +22,28 @@ public class UserController {
     @Autowired
     private UserRepo userRepo;
 
+//    @GetMapping({"/", "/home"})
+//    public String showHome(Model model, HttpSession session) {
+//        User user = (User) session.getAttribute("user");
+//        model.addAttribute("user", user);
+//        return "home";
+//    }
+
     @GetMapping({"/", "/home"})
-    public String showHome(Model model, HttpSession session) {
+    public String showHome(Model model, HttpSession session, Principal principal) {
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
+
+        if (principal != null) {
+            String loggedInAs = "User: " + principal.getName();
+            model.addAttribute("loggedInAs", loggedInAs);
+        } else {
+            model.addAttribute("loggedInAs", "Register/Sign in");
+        }
+
         return "home";
     }
+
 
     @GetMapping("/register")
     public ModelAndView register() {

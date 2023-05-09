@@ -464,7 +464,7 @@ a:focus {
     background: #fff;
     background: url("../css/images/bg/slider-bg-1.jpg") no-repeat;
     background-size: cover;
-    min-height: 550px;
+    min-height: 750px;
 }
 
 .banner .block {
