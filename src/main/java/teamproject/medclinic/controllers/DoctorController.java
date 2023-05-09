@@ -17,7 +17,8 @@ import teamproject.medclinic.entity.Appointments;
 import teamproject.medclinic.entity.MedicalRecord;
 import teamproject.medclinic.entity.User;
 import teamproject.medclinic.repository.AppointmentRepo;
-import teamproject.medclinic.repository.MedicalRecordRepo;
+import teamproject.medclinic.repository.RecordRepo;
+import teamproject.medclinic.repository.RecordRepo;
 import teamproject.medclinic.repository.UserRepo;
 
 @Controller
@@ -25,10 +26,10 @@ import teamproject.medclinic.repository.UserRepo;
 public class DoctorController {
 
     private final UserRepo userRepo;
-    private final MedicalRecordRepo medicalRecordRepo;
+    private final RecordRepo medicalRecordRepo;
     private final AppointmentRepo appointmentRepo;
 
-    public DoctorController(UserRepo userRepo, MedicalRecordRepo medicalRecordRepo,
+    public DoctorController(UserRepo userRepo, RecordRepo medicalRecordRepo,
                             AppointmentRepo appointmentRepo) {
         this.userRepo = userRepo;
         this.medicalRecordRepo = medicalRecordRepo;
@@ -67,7 +68,7 @@ public class DoctorController {
             if (patient.getRole() == User.Role.patient) {
                 MedicalRecord record = new MedicalRecord();
                 record.setPatient(patient);
-                record.setDocumentPath(file.getOriginalFilename());
+                record.setDocument_path(file.getOriginalFilename());
                 medicalRecordRepo.save(record);
 
                 String directory = "/path/to/save/files/" + patient.getId();

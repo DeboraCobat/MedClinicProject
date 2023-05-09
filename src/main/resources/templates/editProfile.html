@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+
+<!--nav bar-->
+<div th:replace="nav.html"></div>
+
+
+<!--form + original -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Edit Profile</h2>
+      <hr/>
+      <form th:action="@{/editProfile}" th:object="${user}" th:method="put">
+
+        <input type="text" th:field="*{first_name}" placeholder="Enter First Name" class="form-control mb-4"/>
+        <input type="text" th:field="*{last_name}" placeholder="Enter Last Name" class="form-control mb-4"/>
+        <input type="date" th:field="*{date_of_birth}" placeholder="Enter Date of Birth" class="form-control mb-4"/>
+        <input type="text" th:field="*{address}" placeholder="Enter Address" class="form-control mb-4"/>
+        <input type="text" th:field="*{phone_number}" placeholder="Enter Phone Number" class="form-control mb-4"/>
+        <input type="email" th:field="*{email}" placeholder="Enter Email" class="form-control mb-4"/>
+        <input type="password" th:field="*{password}" placeholder="Choose Login Password" class="form-control mb-4"/>
+        <label>Gender:</label>
+        <select th:field="*{gender}" class="form-control mb-4">
+          <option value="male">male</option>
+          <option value="female">female</option>
+          <option value="other">other</option>
+        </select>
+
+        <input type="hidden" name="_method" value="PUT">
+
+        <button type="submit" class="btn btn-primary">Edit Profile</button>
+      </form>
+      <a href="/deleteAccount" class="btn alert-danger ">Delete Account</a>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">Profile</h1>
+          <p class="card-text">
+            Last Name: <span th:text="${user.last_name}"></span><br>
+            Date of birth: <span th:text="${user.date_of_birth}"></span><br>
+            Gender: <span th:text="${user.gender}"></span><br>
+            Address: <span th:text="${user.address}"></span><br>
+            Phone Number: <span th:text="${user.phone_number}"></span><br>
+            Email: <span th:text="${user.email}"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

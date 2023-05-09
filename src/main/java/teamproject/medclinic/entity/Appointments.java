@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Entity
@@ -28,7 +28,11 @@ public class Appointments {
     private User doctor;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date appointmentTime;
+
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+//    private Date appointmentTime;
 
     @Column(columnDefinition = "TEXT")
     private String notes;

@@ -1,5 +1,8 @@
 package teamproject.medclinic.controllers;
 
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +10,10 @@ import teamproject.medclinic.entity.User;
 import teamproject.medclinic.repository.AppointmentRepo;
 import teamproject.medclinic.repository.UserRepo;
 
+import java.security.Principal;
 import java.util.List;
+
+import static teamproject.medclinic.entity.User.Role.admin;
 
 @Controller
 @RequestMapping("/admin")
@@ -15,6 +21,9 @@ public class AdminController {
 
     private final UserRepo userRepo;
     private final AppointmentRepo appointmentRepo;
+
+//    private Authentication authentication;
+
 
     public AdminController(UserRepo userRepo, AppointmentRepo appointmentRepo) {
         this.userRepo = userRepo;
@@ -40,13 +49,33 @@ public class AdminController {
     }
 
     // Create Operation
-    @RequestMapping("/doctorCreate")
-    public String doctorCreate(Model model) {
-        User user = new User();
-        user.setRole(User.Role.doctor);
-        model.addAttribute("user", user);
-        return "admin/doctorCreate";
-    }
+
+//    @RequestMapping("/doctorCreate")
+//    public String doctorCreate(Model model, Principal principal) {
+//        String currentUsername = principal.getName(); // Get the username of the current session user
+//
+//        // Retrieve the user from the database based on the username
+//        User currentUser = (User) userRepo.findByRole(admin);
+//
+//        if (currentUser != null && currentUser.getRole() == admin) {
+//            User user = new User();
+//            user.setRole(User.Role.doctor);
+//            model.addAttribute("user", user);
+//            return "admin/doctorCreate";
+//        } else {
+//            // Redirect to login page with error message
+//            model.addAttribute("errorMessage", "You must be logged in as an admin to access this page.");
+//            return "redirect:/login";
+//        }
+//    }
+
+//    @RequestMapping("/doctorCreate")
+//    public String doctorCreate(Model model) {
+//        User user = new User();
+//        user.setRole(User.Role.doctor);
+//        model.addAttribute("user", user);
+//        return "admin/doctorCreate";
+//    }
 
     @PostMapping("/doctorCreate")
     public String doctorCreate(@ModelAttribute("user") User user) {
@@ -68,11 +97,11 @@ public class AdminController {
     public String docUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         User existingDoctor = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        existingDoctor.setFirstName(user.getFirstName());
-        existingDoctor.setLastName(user.getLastName());
-        existingDoctor.setDateOfBirth(user.getDateOfBirth());
+        existingDoctor.setFirst_name(user.getFirst_name());
+        existingDoctor.setLast_name(user.getLast_name());
+        existingDoctor.setDate_of_birth(user.getDate_of_birth());
         existingDoctor.setAddress(user.getAddress());
-        existingDoctor.setPhoneNumber(user.getPhoneNumber());
+        existingDoctor.setPhone_number(user.getPhone_number());
         existingDoctor.setEmail(user.getEmail());
         existingDoctor.setSpecialty(user.getSpecialty());
 
@@ -129,11 +158,11 @@ public class AdminController {
     public String patUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         User existingPatient = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        existingPatient.setFirstName(user.getFirstName());
-        existingPatient.setLastName(user.getLastName());
-        existingPatient.setDateOfBirth(user.getDateOfBirth());
+        existingPatient.setFirst_name(user.getFirst_name());
+        existingPatient.setLast_name(user.getLast_name());
+        existingPatient.setDate_of_birth(user.getDate_of_birth());
         existingPatient.setAddress(user.getAddress());
-        existingPatient.setPhoneNumber(user.getPhoneNumber());
+        existingPatient.setPhone_number(user.getPhone_number());
         existingPatient.setEmail(user.getEmail());
         userRepo.save(existingPatient);
 

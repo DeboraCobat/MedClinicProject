@@ -1,6 +1,5 @@
-
-
 package teamproject.medclinic.entity;
+
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -9,17 +8,16 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.security.auth.kerberos.KerberosTicket;
-import java.lang.management.RuntimeMXBean;
-import java.time.Duration;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name="users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
+
 public class User {
 
     @Id
@@ -31,16 +29,13 @@ public class User {
     private Role role;
 
     @NotBlank
-    @Column(name = "first_name")
-    private String firstName;
+    private String first_name;
 
     @NotBlank
-    @Column(name = "last_name")
-    private String lastName;
+    private String last_name;
 
     @NotNull
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
+    private LocalDate date_of_birth;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -49,17 +44,17 @@ public class User {
     private String address;
 
     @NotBlank
-    @Column(name = "phone_number")
-    private String phoneNumber;
+    private String phone_number;
 
     @NotBlank
     @Email
     private String email;
 
-//    @NotBlank
-//    private String password;
+    @NotBlank
+    private String password;
 
     private String specialty;
+
 
     public enum Role {
         patient, doctor, admin
@@ -68,4 +63,9 @@ public class User {
     public enum Gender {
         male, female, other
     }
+
+    @OneToMany(mappedBy = "patient")
+    private List<Appointments> appointments;
+
 }
+
