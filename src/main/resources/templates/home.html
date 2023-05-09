@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <title>Vital Health Medical Group</title>
 
-     Favicon
-    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" th:href="@{/css/plugins/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/icofont/icofont.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/slick-carousel/slick/slick.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 
-     CSS Stylesheets
-    <link rel="stylesheet" href="static/plugins/bootstrap/css/bootstrap.min.css" th:href="@{static/plugins/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" href="static/plugins/icofont/icofont.min.css" th:href="@{static/plugins/icofont/icofont.min.css}"/>
-    <link rel="stylesheet" href="static/plugins/slick-carousel/slick/slick.css" th:href="@{static/plugins/slick-carousel/slick/slick.css}"/>
-    <link rel="stylesheet" th:href="@{static/css/style.css}"/>
 </head>
 
 </head>
@@ -22,7 +19,7 @@
     <nav class="navbar navbar-expand-lg navigation" id="navbar">
         <div class="container">
             <a class="navbar-brand" th:href="@{/}">
-                <img th:src="@{/images/logo.png}" alt="" class="logo">
+                <img th:src="@{/../css/images/logo.png}" alt="" class="logo">
             </a>
 
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,11 +71,10 @@
                         <span>24/7 Service</span>
                         <h4 class="mb-3">Online Appointments</h4>
                         <p class="mb-4">Make an appointment anytime, anywhere, with our convenient online booking system.</p>
-                        <a th:href="@{/appointment}" class="btn btn-main btn-round-full">Make an Appointment</a>
+                        <a href="appointment.html" class="btn btn-main btn-round-full">Make an Appointment</a>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-                    <div class="feature-item">
+
+                    <div class="feature-item mb-5 mb-lg-0">
                         <div class="feature-icon mb-4">
                             <i class="icofont-ui-clock"></i>
                         </div>
@@ -90,8 +86,7 @@
                             <li class="d-flex justify-content-between">Sat - Sun: <span>10:00am - 5:00pm</span></li>
                         </ul>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
+
                     <div class="feature-item mb-5 mb-lg-0">
                         <div class="feature-icon mb-4">
                             <i class="icofont-support"></i>
@@ -112,7 +107,7 @@
             <div class="col-lg-4 mr-auto col-sm-6">
                 <div class="widget mb-5 mb-lg-0">
                     <div class="logo mb-4">
-                        <img th:src="@{/images/logo.png}" alt="Vital Health Medical Group" class="img-fluid">
+                        <img th:src="@{/css/images/logo.png}" alt="Vital Health Medical Group" class="img-fluid">
                     </div>
                     <p th:text="'Tempora dolorem voluptatum nam vero assumenda voluptate, facilis ad eos obcaecati tenetur veritatis eveniet distinctio possimus.'"></p>
 
