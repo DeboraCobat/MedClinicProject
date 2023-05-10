@@ -50,9 +50,9 @@
         <h1>Add a new patient</h1>
         <form method="post" action="/admin/patientCreate">
             <div class="form-group row">
-                <label for="firstName" class="col-sm-2 col-form-label">First Name:</label>
+                <label for="first_name" class="col-sm-2 col-form-label">First Name:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="firstName" id="firstName" required>
+                    <input type="text" class="form-control" name="first_name" id="first_name" required>
                 </div>
             </div>
             <div class="form-group row">
@@ -72,9 +72,9 @@
                 <div class="col-sm-10">
                     <select class="form-control" name="gender" id="gender" required>
                         <option value="">Select Gender</option>
-                        <option value="MALE">Male</option>
-                        <option value="FEMALE">Female</option>
-                        <option value="OTHER">Other</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
                     </select>
                 </div>
             </div>
