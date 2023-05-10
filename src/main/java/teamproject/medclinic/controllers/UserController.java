@@ -79,25 +79,25 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam("email") String email,
-                        @RequestParam("password") String password,
-                        HttpSession session,
-                        Model model) {
-        if (email == null || password == null) {
-            model.addAttribute("errorLogin", "Please provide both email and password");
-            return "login";
-        }
-
-        User user = userRepo.findByEmail(email);
-        if (user != null && user.getPassword().equals(password)) {
-            session.setAttribute("user", user);
-            return "redirect:/home";
-        } else {
-            model.addAttribute("error", "Invalid email or password");
-            return "login";
-        }
-    }
+//    @PostMapping("/login")
+//    public String login(@RequestParam("email") String email,
+//                        @RequestParam("password") String password,
+//                        HttpSession session,
+//                        Model model) {
+//        if (email == null || password == null) {
+//            model.addAttribute("errorLogin", "Please provide both email and password");
+//            return "login";
+//        }
+//
+//        User user = userRepo.findByEmail(email);
+//        if (user != null && user.getPassword().equals(password)) {
+//            session.setAttribute("user", user);
+//            return "redirect:/home";
+//        } else {
+//            model.addAttribute("error", "Invalid email or password");
+//            return "login";
+//        }
+//    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -151,7 +151,7 @@ public class UserController {
         existingUser.setAddress(updatedUser.getAddress());
         existingUser.setPhone_number(updatedUser.getPhone_number());
         existingUser.setEmail(updatedUser.getEmail());
-        existingUser.setPassword(updatedUser.getPassword());
+//        existingUser.setPassword(updatedUser.getPassword());
         existingUser.setGender(updatedUser.getGender());
 
         // Save the updated user back to the database

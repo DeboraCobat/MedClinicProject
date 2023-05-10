@@ -50,8 +50,8 @@ public class User {
     @Email
     private String email;
 
-    @NotBlank
-    private String password;
+//    @NotBlank
+//    private String password;
 
     private String specialty;
 

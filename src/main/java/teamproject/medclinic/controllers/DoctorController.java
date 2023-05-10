@@ -23,6 +23,7 @@ import teamproject.medclinic.repository.UserRepo;
 
 @Controller
 @RequestMapping("/doctor")
+
 public class DoctorController {
 
     private final UserRepo userRepo;

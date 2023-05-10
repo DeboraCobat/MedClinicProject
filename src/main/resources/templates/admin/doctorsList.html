@@ -85,11 +85,11 @@
         <tbody>
         <tr th:each="user : ${doctors}">
             <td th:text="${user.id}"></td>
-            <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
-            <td th:text="${user.dateOfBirth}"></td>
+            <td th:text="${user.first_name + ' ' + user.last_name}"></td>
+            <td th:text="${user.date_of_birth}"></td>
             <td th:text="${user.gender}"></td>
             <td th:text="${user.address}"></td>
-            <td th:text="${user.phoneNumber}"></td>
+            <td th:text="${user.phone_number}"></td>
             <td th:text="${user.email}"></td>
             <td th:text="${user.specialty}"></td>
             <td>

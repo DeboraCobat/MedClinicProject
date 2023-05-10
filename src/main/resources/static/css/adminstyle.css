@@ -1,6 +1,7 @@
 :root {
     --primary-color: #333;
     --secondary-color: #f5f5f5;
+    --tertiary-color: #6F8BA4;
     --font-primary: 'Montserrat', sans-serif;
 }
 
@@ -10,7 +11,7 @@ body {
 }
 
 .btn {
-    background-color: transparent;
+    background-color: var(--secondary-color);
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
     font-weight: bold;
@@ -22,8 +23,8 @@ body {
 }
 
 .btn:hover {
-    background-color: var(--primary-color);
-    color: #fff;
+    background-color: var(--tertiary-color);
+    color: var(--tertiary-color);
     transition: all 0.3s ease-in-out;
 }
 
