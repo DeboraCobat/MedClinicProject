@@ -33,12 +33,12 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
 
-        if (principal != null) {
-            String loggedInAs = "User: " + principal.getName();
-            model.addAttribute("loggedInAs", loggedInAs);
-        } else {
-            model.addAttribute("loggedInAs", "Register/Sign in");
-        }
+//        if (principal != null) {
+//            String loggedInAs = "User: " + principal.getName();
+//            model.addAttribute("loggedInAs", loggedInAs);
+//        } else {
+//            model.addAttribute("loggedInAs", "Register/Sign in");
+//        }
 
         return "home";
     }
@@ -46,6 +46,7 @@ public class UserController {
     @GetMapping("/contact")
     public String contactUs(Model model) {
         model.addAttribute("message", "Contact us");
+
         return "contact";
     }
 
