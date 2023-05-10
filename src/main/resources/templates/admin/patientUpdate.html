@@ -67,7 +67,7 @@
         <form th:action="@{/admin/patUpdate/{id}(id=${user.id})}" method="post" th:object="${user}">
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
-    </br>
+        </br>
         <form th:action="@{/admin/patientDelete/{id}(id=${user.id}, source='patient')}" method="post">
             <input type="hidden" name="_method" value="delete">
             <button type="submit" class="btn btn-danger">Delete</button>

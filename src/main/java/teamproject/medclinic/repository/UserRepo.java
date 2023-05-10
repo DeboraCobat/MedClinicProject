@@ -2,6 +2,8 @@ package teamproject.medclinic.repository;
 
         import org.springframework.data.jpa.repository.JpaRepository;
         import teamproject.medclinic.entity.User;
+
+        import java.time.LocalDateTime;
         import java.util.List;
 
 public interface UserRepo extends JpaRepository <User, Long> {
@@ -12,8 +14,7 @@ public interface UserRepo extends JpaRepository <User, Long> {
 
         User save(User user);
 
-//        User findFirstByRole(User.Role role);
-//        }
+        void deleteById(Long id);
 }
 
 

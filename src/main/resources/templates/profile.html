@@ -26,28 +26,26 @@
             Phone Number: <span th:text="${user.phone_number}"></span><br>
             Email: <span th:text="${user.email}"></span>
           </p>
-          <a type="button" href="/editProfile" class="btn btn-primary btn-sm mt-3">
+          <button type="button" class="btn btn-primary btn-sm mt-3">
             Edit Profile
-          </a>
+          </button>
         </div>
       </div>
 
       <div class="card mt-4">
         <div class="card-body">
           <h1 class="card-title">Appointments</span></h1>
-          <a href="/bookAppointment" type="button" class="btn btn-primary btn-sm mt-3 mb-3">
+          <button type="button" class="btn btn-primary btn-sm mt-3 mb-3">
             Schedule Appointment
-          </a>
-          <td>
-            <a href="#" class="btn btn-sm btn-primary">Edit</a>
-          </td>
-          <tbody>
-          <ul th:each="appointment: ${appointments}">
-            Doctor: <li th:text="${appointment.doctor.first_name}"></li>
-            Appointment: <li th:text="${#dates.format(appointment.appointmentTime, 'dd/MM/yyyy HH:mm')}"></li>
-            Reason: <li th:text="${appointment.notes}"></li>
-          </ul>
-          </tbody>
+          </button>
+          <p class="card-text">
+            Last Name: <span th:text="${user.last_name}"></span><br>
+            Date of birth: <span th:text="${user.date_of_birth}"></span><br>
+            Gender: <span th:text="${user.gender}"></span><br>
+            Address: <span th:text="${user.address}"></span><br>
+            Phone Number: <span th:text="${user.phone_number}"></span><br>
+            Email: <span th:text="${user.email}"></span>
+          </p>
         </div>
       </div>
     </div>
@@ -83,3 +81,4 @@
 
 </body>
 </html>
+

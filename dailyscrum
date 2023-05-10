@@ -101,8 +101,40 @@ Debora
 - Not done:Update functional on browser
 2. To do until next Scrum:
 - Finish  UPDATE to Doctors and Patients
-- Finish appoitments CRUD
+- Finish appointments CRUD
 - Experiment with calendars and link them with appointments/patients/doctors.
 3. Need assistance / figure things out
 
 - Finish UPDATE to Doctors and Patients
+
+May 8th 2023
+
+Matt
+1. Done/Not done since last scrum
+- Done : Delete profile / Edit profile
+- Done : Complete scrum for users
+- Done: Validations for register page complete
+- Done: Creation of appointment page for users
+- Not done : Validation / Database entry for user appointments
+- Not done : Calendar implementation with AJAX for appointment availabilities
+- Not done: Display current appointments on user profile, with ability to cancel.
+2. To do until next SCRUM
+- Display appointments for individual users on profile page.
+- Ability to cancel appointments on profile page.
+- Finish Appointment page and validations for users.
+- Begin implement AJAX for the calendar if possible.
+- Limit access to certain pages via user roles.
+3. Questions
+- Potential questions about AJAX implementation if progress allows it.
+
+Debora
+1. Done / not done since last scrum:
+- Done: CRUD ADMIN API
+- Not done: edit / delete for patient not functional on browser
+2. To do until next Scrum:
+- Finish edit / delete for patient not functional on browser
+- Finish DOCTORS CRUD
+- Start Styling
+- Start hosting
+- Experiment with calendars and link them with appointments/patients/doctors.
+3. Need assistance / figure things out

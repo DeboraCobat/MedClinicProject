@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="medical_records")
+@Table(name="medicalRecords")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,5 +23,4 @@ public class MedicalRecord {
     private User patient;
 
     private String document_path;
-
 }
