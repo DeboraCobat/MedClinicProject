@@ -80,6 +80,7 @@ public class AdminController {
         return "redirect:/admin/doctorsList";
     }
 
+
     // DOCTOR Delete Operation
     @RequestMapping("/doctorDelete/{id}")
     public String doctorDelete(@PathVariable("id") Long id) {
@@ -121,23 +122,24 @@ public class AdminController {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         model.addAttribute("user", user);
-        return "admin/patientUpdate";
+        return "admin/patientUpdate"; // Assuming this is the name of your Thymeleaf template file
     }
 
-    @PostMapping("/patUpdate/{id}")
+    @PostMapping("/patUpdate/{id}") // Updated the mapping URL to match the GetMapping
     public String patUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         User existingPatient = userRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));;
+
         existingPatient.setFirst_name(user.getFirst_name());
         existingPatient.setLast_name(user.getLast_name());
         existingPatient.setDate_of_birth(user.getDate_of_birth());
         existingPatient.setAddress(user.getAddress());
         existingPatient.setPhone_number(user.getPhone_number());
         existingPatient.setEmail(user.getEmail());
+
         userRepo.save(existingPatient);
 
         return "redirect:/admin/patientsList";
-
     }
 
     // PATIENT Delete Operation
