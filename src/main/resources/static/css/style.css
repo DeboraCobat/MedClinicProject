@@ -666,7 +666,7 @@ a:focus {
 
 /* Style the login button */
 .btn-primary {
-    background-color: #003D3B;
+    background-color: #4CAF50;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -692,6 +692,8 @@ a:focus {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
+
+
 
 .cta {
     background: url("../css/images/bg/bg-4.jpg") no-repeat 50% 50%;
@@ -726,126 +728,49 @@ a:focus {
     background-size: cover;
     position: relative;
 }
-/*
-.testimonial {
-  position: relative;
+
+
+/* CSS for form inputs */
+.register-form input[type=text], input[type=email], input[type=password], input[type=date], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-.testimonial:before {
-  width: 48%;
-  height: 100%;
-  top: 0;
-  left: 0px;
-  position: absolute;
-  content: "";
-  background: url("../images/bg/bg-2.jpg") no-repeat 50% 50%;
+/* Style the submit button */
+.register-form button[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.testimonial .slick-dots {
-  text-align: left;
+
+
+/* Style the form header */
+.register h2{
+    font-family: "Exo", sans-serif;
+    text-align: left;
+    color: #4CAF50;
 }
 
-.testimonial-block {
-  position: relative;
-  margin-bottom: 20px;
+/* Style the form labels */
+label {
+    display: block;
+    font-weight: bold;
 }
 
-.testimonial-block p {
-  background: #fff;
-  font-size: 18px;
+/* Style form errors */
+.error {
+    color: red;
 }
-
-.testimonial-block .client-info {
-  margin-bottom: 20px;
-}
-
-.testimonial-block .client-info h4 {
-  margin-bottom: 0px;
-}
-
-.testimonial-block i {
-  font-size: 60px;
-  position: absolute;
-  right: 46px;
-  bottom: 89px;
-  opacity: .08;
-}
-
-.testimonial-block .slick-dots {
-  text-align: left;
-}
-
-.testimonial-wrap-2 .slick-dots {
-  margin-left: -10px;
-}
-
-.testimonial-block.style-2 {
-  background: #fff;
-  padding: 30px;
-  margin: 0px 4px;
-  margin-bottom: 30px;
-}
-
-.testimonial-block.style-2 .testimonial-thumb {
-  float: left;
-}
-
-.testimonial-block.style-2 .testimonial-thumb img {
-  width: 80px;
-  height: 80px;
-  border-radius: 100%;
-  margin-right: 20px;
-  margin-bottom: 30px;
-  border: 5px solid #eff0f3;
-  margin-top: -5px;
-}
-
-.testimonial-block.style-2 .client-info p {
-  clear: both;
-  background: transparent;
-}
-
-.testimonial-block.style-2 i {
-  bottom: -20px;
-  color: #e12454;
-  opacity: .3;
-}
-
-@media (max-width: 480px) {
-  .testimonial-wrap {
-    margin-left: 0px;
-  }
-  .testimonial::before {
-    display: none;
-  }
-}
-
-@media (max-width: 400px) {
-  .testimonial-wrap {
-    margin-left: 0px;
-  }
-  .testimonial::before {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .testimonial-wrap {
-    margin-left: 0px;
-  }
-  .testimonial::before {
-    display: none;
-  }
-}
-
-@media (max-width: 992px) {
-  .testimonial-wrap {
-    margin-left: 0px;
-  }
-  .testimonial::before {
-    display: none;
-  }
-} */
 
 .contact-form-wrap .form-group {
     margin-bottom: 20px;

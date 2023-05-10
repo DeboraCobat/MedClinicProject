@@ -1,6 +1,5 @@
 package teamproject.medclinic.controllers;
 
-import ch.qos.logback.core.LayoutBase;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,7 +51,7 @@ public class UserController {
 
     @GetMapping("/register")
     public ModelAndView register() {
-        ModelAndView mav = new ModelAndView("registration");
+        ModelAndView mav = new ModelAndView("register");
         User newUser = new User();
         mav.addObject("user", newUser);
         return mav;
