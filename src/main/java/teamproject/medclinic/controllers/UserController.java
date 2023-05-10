@@ -13,6 +13,8 @@ import teamproject.medclinic.entity.User;
 import teamproject.medclinic.repository.UserRepo;
 import org.springframework.ui.Model;
 
+import java.security.Principal;
+
 
 @Controller
 public class UserController {
@@ -20,11 +22,32 @@ public class UserController {
     @Autowired
     private UserRepo userRepo;
 
+//    @GetMapping({"/", "/home"})
+//    public String showHome(Model model, HttpSession session) {
+//        User user = (User) session.getAttribute("user");
+//        model.addAttribute("user", user);
+//        return "home";
+//    }
+
     @GetMapping({"/", "/home"})
-    public String showHome(Model model, HttpSession session) {
+    public String showHome(Model model, HttpSession session, Principal principal) {
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
+
+        if (principal != null) {
+            String loggedInAs = "User: " + principal.getName();
+            model.addAttribute("loggedInAs", loggedInAs);
+        } else {
+            model.addAttribute("loggedInAs", "Register/Sign in");
+        }
+
         return "home";
+    }
+
+    @GetMapping("/contact")
+    public String contactUs(Model model) {
+        model.addAttribute("message", "Contact us");
+        return "contact";
     }
 
     @GetMapping("/register")
@@ -47,25 +70,25 @@ public class UserController {
         return "login";
     }
 
-//    @PostMapping("/login")
-//    public String login(@RequestParam("email") String email,
-//                        @RequestParam("password") String password,
-//                        HttpSession session,
-//                        Model model) {
-//        if (email == null || password == null) {
-//            model.addAttribute("errorLogin", "Please provide both email and password");
-//            return "login";
-//        }
-//
-//        User user = userRepo.findByEmail(email);
-//        if (user != null && user.getPassword().equals(password)) {
-//            session.setAttribute("user", user);
-//            return "redirect:/home";
-//        } else {
-//            model.addAttribute("error", "Invalid email or password");
-//            return "login";
-//        }
-//    }
+    @PostMapping("/login")
+    public String login(@RequestParam("email") String email,
+                        @RequestParam("password") String password,
+                        HttpSession session,
+                        Model model) {
+        if (email == null || password == null) {
+            model.addAttribute("errorLogin", "Please provide both email and password");
+            return "login";
+        }
+
+        User user = userRepo.findByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            session.setAttribute("user", user);
+            return "redirect:/home";
+        } else {
+            model.addAttribute("error", "Invalid email or password");
+            return "login";
+        }
+    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
