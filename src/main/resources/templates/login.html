@@ -21,14 +21,16 @@
 <div class="container mt-4">
     <h2>Login</h2>
     <hr/>
-    <form th:action="@{/login}" method="POST">
+    <form th:action="@{/login}" method="POST" id="login-form">
 
         <input type="email" name="email" placeholder="Enter Email" class="form-control col-4 mb-4"/>
         <input type="password" name="password" placeholder="Enter Password" class="form-control col-4 mb-4"/>
 
 
-        <button type="submit" class="btn btn-primary">Login</button>
-        Don't have an account? Click <a href="@{/registration.ht}">here</a>
+        <button type="submit" class="btn btn-primary btn-sm">Login</button>
+        </br>
+        </br>
+        Don't have an account? Click <a href="@{/register}">here</a>
 
     </form>
 
