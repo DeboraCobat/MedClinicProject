@@ -647,11 +647,6 @@ a:focus {
     margin-bottom: -80px;
 }
 
-/* Set the background color of the body */
-body {
-    background-color: #f1f1f1;
-}
-
 /* Center the login form */
 .login-form {
     margin: auto;
@@ -659,7 +654,7 @@ body {
 }
 
 /* Style the form inputs */
-.form-control {
+.login-form-control {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -725,11 +720,6 @@ body {
 .cta-section {
     margin-bottom: -80px;
 }
-
-/*.cta-2 {*/
-/*    background: url("/css/images/bg/cta-bg.png") no-repeat;*/
-/*    background-position: center center;*/
-/*}*/
 
 .cta-page {
     background: url("../css/images/bg/banner.jpg") no-repeat;
