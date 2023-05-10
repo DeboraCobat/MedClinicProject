@@ -21,28 +21,6 @@ public class AppointmentsController {
         this.userRepo = userRepo;
     }
 
-//
-//    // List ALL Operation (HTTP GET)
-//    @GetMapping("/admin/appointmentsList")
-//    public String appointmentsList(Model model) {
-//        List<Appointments> appointments = appointmentRepo.findAll();
-//        model.addAttribute("appointments", appointments);
-//        return "admin/appointmentsList";
-//    }
-//}
-// // Create Operation (HTTP POST)
-//
-////    @RequestMapping(value = "/admin/appointmentCreate", method = RequestMethod.GET)
-////    public String appointmentCreate() {
-////        return "admin/appointmentCreate";
-////    }
-////
-////    @PostMapping("/admin/appointmentCreate")
-////    public ResponseEntity<Users> appointmentCreate(@RequestBody Users doctor) {
-////        doctor.setRole(Users.Role.doctor);
-////        Users savedDoctor = userRepo.save(doctor);
-////        return ResponseEntity.status(HttpStatus.CREATED).body(savedDoctor);
-////    }
 
     //// APPOINTMENTS CRUD ////
     @GetMapping("/admin/appointmentsList")
