@@ -44,6 +44,11 @@ public class UserController {
         return "home";
     }
 
+    @GetMapping("/contact")
+    public String contactUs(Model model) {
+        model.addAttribute("message", "Contact us");
+        return "contact";
+    }
 
     @GetMapping("/register")
     public ModelAndView register() {
