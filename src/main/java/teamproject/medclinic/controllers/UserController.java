@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import teamproject.medclinic.entity.Appointments;
 import teamproject.medclinic.entity.User;
+import teamproject.medclinic.repository.AppointmentRepo;
 import teamproject.medclinic.repository.UserRepo;
 import org.springframework.ui.Model;
 
 import java.security.Principal;
+import java.util.List;
 
 
 @Controller
@@ -21,6 +24,12 @@ public class UserController {
 
     @Autowired
     private UserRepo userRepo;
+    private AppointmentRepo appointmentRepo;
+
+    public UserController(AppointmentRepo appointmentRepo, UserRepo userRepo) {
+        this.appointmentRepo = appointmentRepo;
+        this.userRepo = userRepo;
+    }
 
 //    @GetMapping({"/", "/home"})
 //    public String showHome(Model model, HttpSession session) {
@@ -34,12 +43,12 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
 
-        if (principal != null) {
-            String loggedInAs = "User: " + principal.getName();
-            model.addAttribute("loggedInAs", loggedInAs);
-        } else {
-            model.addAttribute("loggedInAs", "Register/Sign in");
-        }
+//        if (principal != null) {
+//            String loggedInAs = "User: " + principal.getName();
+//            model.addAttribute("loggedInAs", loggedInAs);
+//        } else {
+//            model.addAttribute("loggedInAs", "Register/Sign in");
+//        }
 
         return "home";
     }
@@ -52,7 +61,7 @@ public class UserController {
 
     @GetMapping("/register")
     public ModelAndView register() {
-        ModelAndView mav = new ModelAndView("registration");
+        ModelAndView mav = new ModelAndView("register");
         User newUser = new User();
         mav.addObject("user", newUser);
         return mav;
@@ -103,8 +112,80 @@ public class UserController {
             model.addAttribute("error", "You are not logged in");
             return "login";
         }
+        List<Appointments> appointments = appointmentRepo.findByDoctorIdOrPatientId(user.getId(), user.getId());
+        model.addAttribute("appointments", appointments);
         model.addAttribute("user", user);
         return "profile";
+    }
+
+    @GetMapping("/editProfile")
+    public String showEditProfileForm(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            model.addAttribute("error", "You are not logged in");
+            return "login";
+        }
+        model.addAttribute("user", user);
+        return "editProfile";
+    }
+
+
+    @PostMapping("/editProfile")
+    public String editProfile(@ModelAttribute("user") User updatedUser, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        // Retrieve the existing user from the database
+        User existingUser = userRepo.findById(user.getId()).orElse(null);
+        if (existingUser == null) {
+            // Handle the case where the user is not found in the database
+            return "redirect:/login";
+        }
+
+        // Update the user properties with the new values
+        existingUser.setFirst_name(updatedUser.getFirst_name());
+        existingUser.setLast_name(updatedUser.getLast_name());
+        existingUser.setDate_of_birth(updatedUser.getDate_of_birth());
+        existingUser.setAddress(updatedUser.getAddress());
+        existingUser.setPhone_number(updatedUser.getPhone_number());
+        existingUser.setEmail(updatedUser.getEmail());
+        existingUser.setPassword(updatedUser.getPassword());
+        existingUser.setGender(updatedUser.getGender());
+
+        // Save the updated user back to the database
+        userRepo.save(existingUser);
+
+        // Update the user object in the session with the updated values
+        session.setAttribute("user", existingUser);
+
+        return "redirect:/profile";
+    }
+
+    @GetMapping("/deleteAccount")
+    public String showDeleteAccountConfirmation(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            model.addAttribute("error", "You are not logged in");
+            return "login";
+        }
+        model.addAttribute("user", user);
+        return "deleteAccount";
+    }
+
+    @PostMapping("/deleteAccount")
+    public String deleteAccount(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        userRepo.delete(user);
+
+        // Clear the session and redirect the user to the login page or any other appropriate page
+        session.invalidate();
+        return "redirect:/login";
     }
 
 }

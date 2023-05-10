@@ -21,12 +21,12 @@
     <hr/>
     <form th:action="@{/saveUser}" th:object="${user}" method="POST">
 
-        <input type="text" th:field="*{firstName}" placeholder="Enter First Name" class="form-control col-4 mb-4"/>
-        <input type="text" th:field="*{lastName}" placeholder="Enter Last Name" class="form-control col-4 mb-4"/>
-        <input type="date" th:field="*{dateOfBirth}" placeholder="Enter Date of Birth"
+        <input type="text" th:field="*{first_name}" placeholder="Enter First Name" class="form-control col-4 mb-4"/>
+        <input type="text" th:field="*{last_name}" placeholder="Enter Last Name" class="form-control col-4 mb-4"/>
+        <input type="date" th:field="*{date_of_birth}" placeholder="Enter Date of Birth"
                class="form-control col-4 mb-4"/>
         <input type="text" th:field="*{address}" placeholder="Enter Address" class="form-control col-4 mb-4"/>
-        <input type="text" th:field="*{phoneNumber}" placeholder="Enter Phone Number" class="form-control col-4 mb-4"/>
+        <input type="text" th:field="*{phone_number}" placeholder="Enter Phone Number" class="form-control col-4 mb-4"/>
         <input type="email" th:field="*{email}" placeholder="Enter Email" class="form-control col-4 mb-4"/>
         <input type="password" th:field="*{password}" placeholder="Choose Login Password"
                class="form-control col-4 mb-4"/>

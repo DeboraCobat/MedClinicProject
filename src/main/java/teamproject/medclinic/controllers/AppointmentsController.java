@@ -1,19 +1,24 @@
 package teamproject.medclinic.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import teamproject.medclinic.entity.Appointments;
+import teamproject.medclinic.entity.User;
 import teamproject.medclinic.repository.AppointmentRepo;
+import teamproject.medclinic.repository.UserRepo;
 
 import java.util.List;
 
 @Controller
 public class AppointmentsController {
     private final AppointmentRepo appointmentRepo;
+    private UserRepo userRepo;
 
-    public AppointmentsController(AppointmentRepo appointmentRepo) {
+    public AppointmentsController(AppointmentRepo appointmentRepo, UserRepo userRepo) {
         this.appointmentRepo = appointmentRepo;
+        this.userRepo = userRepo;
     }
 
 //
@@ -79,5 +84,51 @@ public class AppointmentsController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
         appointmentRepo.delete(appointment);
         return "redirect:/admin/appointmentsList";
+    }
+
+    @GetMapping("/bookAppointment")
+    public String showBookAppointmentPage(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            model.addAttribute("errorBook", "Account required for scheduling.");
+            model.addAttribute("user", new User()); // Add this line to provide a User object to the template
+            return "register";
+        }
+        List<User> doctors = userRepo.findByRole(User.Role.doctor);
+        model.addAttribute("user", user);
+        model.addAttribute("appointment", new Appointments());
+        model.addAttribute("doctors", doctors);
+        return "bookAppointment";
+    }
+
+    @PostMapping("/bookAppointment")
+    public String bookAppointment(@ModelAttribute("appointment") Appointments appointment, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login"; // Redirect to login page if user is not logged in
+        }
+
+        User selectedDoctor = userRepo.findById(appointment.getDoctor().getId()).orElse(null);
+        if (selectedDoctor == null || selectedDoctor.getRole() != User.Role.doctor) {
+            return "redirect:/bookAppointment"; // Redirect back to the bookAppointment page if the selected doctor is invalid
+        }
+
+        appointment.setPatient(user);
+        appointment.setDoctor(selectedDoctor);
+        appointmentRepo.save(appointment);
+
+        return "redirect:/appointmentConfirmation"; // Redirect to appointments page or any other desired page
+    }
+
+    @GetMapping("/appointmentConfirmation")
+    public String confirm(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            model.addAttribute("errorBook", "Account required to schedule an appointment.");
+            return "register";
+        }
+
+        model.addAttribute("message", "Appointment Scheduled!");
+        return "appointmentConfirmation";
     }
 }
