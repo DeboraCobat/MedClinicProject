@@ -78,11 +78,11 @@
             <tbody>
             <tr th:each="patient : ${patients}">
                 <td th:text="${patient.id}"></td>
-                <td th:text="${patient.firstName} + ' ' + ${patient.lastName}"></td>
-                <td th:text="${patient.dateOfBirth}"></td>
+                <td th:text="${patient.first_name} + ' ' + ${patient.last_name}"></td>
+                <td th:text="${patient.date_of_birth}"></td>
                 <td th:text="${patient.gender}"></td>
                 <td th:text="${patient.address}"></td>
-                <td th:text="${patient.phoneNumber}"></td>
+                <td th:text="${patient.phone_number}"></td>
                 <td th:text="${patient.email}"></td>
                 <td>
                     <a th:href="@{/admin/patientUpdate/{id}(id=${patient.id})}" class="btn btn-sm btn-primary">Edit</a>
