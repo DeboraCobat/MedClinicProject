@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Information</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+<h1>Patient Information</h1>
+<table>
+  <tr>
+    <th>First Name</th>
+    <td id="firstName"></td>
+  </tr>
+  <tr>
+    <th>Last Name</th>
+    <td id="lastName"></td>
+  </tr>
+  <tr>
+    <th>Date of Birth</th>
+    <td id="dateOfBirth"></td>
+  </tr>
+  <tr>
+    <th>Address</th>
+    <td id="address"></td>
+  </tr>
+  <tr>
+    <th>Phone Number</th>
+    <td id="phoneNumber"></td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td id="email"></td>
+  </tr>
+</table>
+
+<script>
+  // Fetch patient information from the server
+  const patientId = 1; // Replace with the actual patient ID from your code
+  fetch(`/patient/patientInfo/${patientId}`)
+          .then(response => response.json())
+          .then(patient => {
+            // Update the HTML elements with patient information
+            document.getElementById("firstName").textContent = patient.first_name;
+            document.getElementById("lastName").textContent = patient.last_name;
+            document.getElementById("dateOfBirth").textContent = patient.date_of_birth;
+            document.getElementById("address").textContent = patient.address;
+            document.getElementById("phoneNumber").textContent = patient.phone_number;
+            document.getElementById("email").textContent = patient.email;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+</script>
+</body>
+</html>

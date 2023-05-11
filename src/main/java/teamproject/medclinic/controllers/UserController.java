@@ -186,7 +186,7 @@ public class UserController {
         existingUser.setAddress(updatedUser.getAddress());
         existingUser.setPhone_number(updatedUser.getPhone_number());
         existingUser.setEmail(updatedUser.getEmail());
-//        existingUser.setPassword(updatedUser.getPassword());
+        existingUser.setPassword(updatedUser.getPassword());
         existingUser.setGender(updatedUser.getGender());
 
         // Save the updated user back to the database
