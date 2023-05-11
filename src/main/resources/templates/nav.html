@@ -22,9 +22,7 @@
                         <a class="nav-link" th:href="@{/contact}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                           <span id="loggedInUser" th:text="${loggedInAs}"></span> Register/Login
-                        </a>
+                        <a class="nav-link" id="loggedInUser" th:text="${loggedInAs != null ? loggedInAs : 'Register/Login'}" th:href="${loggedInAs != null ? '#' : '/login'}">Register/Login</a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" th:if="${user == null}" href="/login">Login</a>
                             <a class="dropdown-item" th:if="${user != null}" href="/profile">Profile</a>
