@@ -86,6 +86,47 @@
     });
   });
 </script>
+<!--<script>-->
+<!--  const calendar = document.getElementById("calendar");-->
+
+<!--  $(document).ready(function() {-->
+<!--    $('#calendar').fullCalendar({-->
+<!--      header: {-->
+<!--        left: 'prev,next today',-->
+<!--        center: 'title',-->
+<!--        right: 'month,agendaWeek,agendaDay'-->
+<!--      },-->
+<!--      defaultView: 'month',-->
+<!--      editable: false,-->
+<!--      eventLimit: true,-->
+<!--      events: function(start, end, timezone, callback) {-->
+
+<!--        $.ajax({-->
+<!--          url: '/admin/appointmentsList',-->
+<!--          type: 'GET',-->
+<!--          dataType: 'json',-->
+<!--          success: function(response) {-->
+<!--            var events = [];-->
+
+<!--            // Convert the response into FullCalendar event objects-->
+<!--            response.forEach(function(appointment) {-->
+<!--              events.push({-->
+<!--                title: 'Doctor: ' + appointment.doctor.firstName,-->
+<!--                start: appointment.appointmentTime,-->
+<!--                end: appointment.appointmentTime,-->
+<!--                reason: appointment.notes-->
+<!--              });-->
+<!--            });-->
+
+<!--            // Pass the events to the calendar-->
+<!--            callback(events);-->
+<!--          }-->
+<!--        });-->
+<!--      }-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->
+
 
 
 </br>
