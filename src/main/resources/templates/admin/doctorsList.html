@@ -8,6 +8,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/plugins/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/icofont/icofont.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/slick-carousel/slick/slick.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>">
 </head>
 
 <body>
@@ -51,14 +55,7 @@
 <div class="container my-4">
     <div class="row mb-3">
         <div class="col-md-8">
-            <!--            <input type="text" class="form-control" placeholder="Search">-->
-            <form th:action="@{/users/search}" method="get">
-                <label>
-                    <input type="text" name="query" placeholder="Search doctors...">
-                </label>
-                <button type="submit">Search</button>
-            </form>
-
+            <input type="text" class="form-control" placeholder="Search">
         </div>
         <div class="col-md-4 text-right">
             <a th:href="@{/admin/doctorCreate}" class="btn btn-primary">+ New Doctor</a>
