@@ -2,6 +2,7 @@ package teamproject.medclinic.controllers;
 
 import ch.qos.logback.core.LayoutBase;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,12 +71,25 @@ public class UserController {
         return mav;
     }
 
+
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user) {
+    public ModelAndView saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+        ModelAndView mav = new ModelAndView("register");
+        if (bindingResult.hasErrors()) {
+            mav.addObject("user", user);
+            return mav;
+        }
         user.setRole(User.Role.patient);
         userRepo.save(user);
-        return "redirect:/";
+        return new ModelAndView("redirect:/");
     }
+
+//    @PostMapping("/saveUser")
+//    public String saveUser(@ModelAttribute("user") User user) {
+//        user.setRole(User.Role.patient);
+//        userRepo.save(user);
+//        return "redirect:/";
+//    }
 
 
 
