@@ -1,26 +1,15 @@
 <!--<!DOCTYPE html>-->
 <!--<html xmlns:th="http://www.thymeleaf.org">-->
 <!--<head>-->
+<!--    <meta charset="UTF-8">-->
 <!--    <title>Calendar</title>-->
+<!--    <link rel="stylesheet" href="styles.css">-->
 <!--</head>-->
 <!--<body>-->
 <!--<h1>Calendar</h1>-->
-<!--<table>-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--        <th>Title</th>-->
-<!--        <th>Date and Time</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr th:each="appointment : ${appointments}">-->
-<!--        <td>-->
-<!--            <a th:href="@{/calendar/appointment/{id}(id=${appointment.id})}" th:text="${appointment.title}"></a>-->
-<!--        </td>-->
-<!--        <td th:text="${appointment.dateTime}"></td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--</table>-->
-<!--<a href="/calendar/appointment/new">Add Appointment</a>-->
+
+<!--<div id="calendar"></div>-->
+
+<!--<script th:src="@{/js/script.js}"></script>-->
 <!--</body>-->
 <!--</html>-->
