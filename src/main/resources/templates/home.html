@@ -7,7 +7,9 @@
     <link rel="stylesheet" th:href="@{/css/plugins/bootstrap/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/plugins/icofont/icofont.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/plugins/slick-carousel/slick/slick.css}"/>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="icon" type="image/png" th:href="@{/css/images/favicon.ico}" sizes="16x16">
+
 
 </head>
 
@@ -18,16 +20,18 @@
 <div th:replace="nav.html"></div>
 
 <!-- BANNER  -->
-<
-<section class="main-banner">
+
+<section class="banner">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-12 col-xl-7">
-                <div class="content-block">
+                <div class="block">
                     <div class="divider mb-3"></div>
                     <span class="text-uppercase text-sm letter-spacing ">Personalized Healthcare Services</span>
                     <h1 class="mb-3 mt-3">Your Caring Health Partner</h1>
-                    <p class="mb-4 pr-5">We provide exceptional healthcare services that prioritize your unique needs. Our team of expert healthcare professionals offers compassionate care and treatment to each patient.</p>
+                    <p class="mb-4 pr-5">We provide exceptional healthcare services that prioritize your unique needs.
+                        Our team of expert healthcare professionals offers compassionate care and treatment to each
+                        patient.</p>
                 </div>
             </div>
         </div>
@@ -66,7 +70,7 @@
                             <i class="icofont-support"></i>
                         </div>
                         <span>Emergency Care</span>
-                        <h4 class="mb-3">24/7 Assistance</h4>
+                        <h4 class="mb-3">1-800-700-6202</h4>
                         <p>Contact us anytime for emergency medical care. Our team is always available to provide you with the support you need.</p>
                     </div>
                 </div>
@@ -75,8 +79,6 @@
     </div>
 </section>
 </br>
-
-    <div th:replace="footer.html"></div>
-
+<div th:replace="footer.html"></div>
 </body>
 </html>

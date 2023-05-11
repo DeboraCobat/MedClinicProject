@@ -90,3 +90,13 @@ body {
 .feature-section.border-top {
     border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
 }
+
+.logo {
+    width: 160px;
+    height: 50px;
+}
+.logo-image {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+}

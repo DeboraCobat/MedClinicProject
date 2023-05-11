@@ -22,12 +22,32 @@
                         <a class="nav-link" th:href="@{/contact}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="loggedInUser" th:text="${loggedInAs != null ? loggedInAs : 'Register/Login'}" th:href="${loggedInAs != null ? '#' : '/login'}">Register/Login</a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" th:if="${user == null}" href="/login">Login</a>
-                            <a class="dropdown-item" th:if="${user != null}" href="/profile">Profile</a>
-                            <a class="dropdown-item" th:if="${user != null}" href="/logout">Logout</a>
+
+                        <div th:if="${session.user != null}" class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" id="loggedInUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span th:text="${session.user.first_name}"></span>
+                            </a>
+<!--                            <div class="dropdown-menu" aria-labelledby="loggedInUser">-->
+<!--                                <a class="dropdown-item" th:href="/profile">View Profile</a>-->
+<!--                                <a class="dropdown-item" th:href="/logout">Logout</a>-->
+<!--                            </div>-->
                         </div>
+                        <a th:unless="${session.user != null}" class="nav-link" href="/login">
+                            Login
+                        </a>
+
+
+<!--                            <li class="nav-item dropdown">-->
+<!--                                <div th:if="${session.user != null}" class="dropdown">-->
+<!--                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="loggedInUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                        <span th:text="${session.user.first_name}"></span>-->
+<!--                                    </a>-->
+<!--                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">-->
+<!--                                        <a class="dropdown-item" href="#">View Profile</a>-->
+<!--                                        <a class="dropdown-item" href="#">Log Out</a>-->
+<!--                                    </div>-->
+<!--                            </li>-->
+
                     </li>
                 </ul>
             </div>
