@@ -138,3 +138,29 @@ Debora
 - Start hosting
 - Experiment with calendars and link them with appointments/patients/doctors.
 3. Need assistance / figure things out
+
+
+May 11th 2023
+
+MATT
+1. Done since last scrum
+- Done: Pages for doctors
+- Done: Pages to view patients as a doctor.
+- Done: Use roles upon login to redirect users accordingly.
+- Not Done: Implement calendar with AJAX.
+2. Plan until next Scrum
+- Verify validations
+- Finalize main functionalities of the website
+- Attempt AJAX with the calendar.
+3. Need assistance / figure things out
+- Require assistance for hosting on the cloud.
+
+DEBORA
+1. Done since last scrum
+- Done: home page and login page styling
+- Not Done: admin page styling
+2. Plan until next Scrum
+- admin page styling
+- hosting site
+3. Need assistance / figure things out
+- Require assistance for hosting on the cloud.
