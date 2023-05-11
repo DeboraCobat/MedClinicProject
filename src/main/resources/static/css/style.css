@@ -631,38 +631,7 @@ a:focus {
     border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
 }
 
-.w-hours li {
-    padding: 6px 0px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
 
-.counter-stat {
-    text-align: center;
-    padding: 55px 0px 40px 0px;
-    position: relative;
-}
-
-.counter-stat i {
-    display: block;
-    color: rgba(255, 255, 255, 0.06);
-    font-size: 70px;
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    -webkit-transform: translateY(25px);
-    transform: translateY(25px);
-}
-
-.counter-stat span {
-    font-size: 70px;
-    color: #fff;
-}
-
-.counter-stat p {
-    margin-bottom: 0px;
-    color: rgba(255, 255, 255, 0.7);
-}
 
 .mb--80 {
     margin-bottom: -80px;
