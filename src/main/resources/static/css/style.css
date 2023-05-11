@@ -216,31 +216,6 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 .btn.active:focus, .btn:active:focus, .btn:focus {
     outline: 0;
 }
-/*
-.bg-gray {
-  background: #eff0f3;
-}
-
-.bg-primary {
-  background: #003D3B;
-}
-
-.bg-primary-dark {
-  background: #152440;
-}
-
-.bg-primary-darker {
-  background: #090f1a;
-}
-
-.bg-dark {
-  background: #222;
-}
-
-.bg-gradient {
-  background-image: linear-gradient(145deg, rgba(19, 177, 205, 0.95) 0%, rgba(152, 119, 234, 0.95) 100%);
-  background-repeat: repeat-x;
-} */
 
 .section {
     padding: 100px 0;
@@ -485,11 +460,11 @@ a:focus {
     background: #fff;
     background: url("../css/images/bg/slider-bg-1.jpg") no-repeat;
     background-size: cover;
-    min-height: 750px;
+    min-height: 100px;
 }
 
 .banner .block {
-    padding: 80px 0px 160px;
+    padding: 80px 0px 100px;
 }
 
 .banner .block h1 {
@@ -607,9 +582,9 @@ a:focus {
 
 .feature-item {
     flex-basis: 33.33%;
-    margin: 0px 10px;
+    margin: 20px 10px;
     padding: 40px 30px;
-    background-color: #fff;
+    background-color: #f1f1f1;
     border-radius: 15px 15px 15px 15px;
     box-shadow: 0px 0px 30px 0px rgba(0, 42, 106, 0.1);
 }
@@ -682,7 +657,6 @@ a:focus {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
-
 
 
 .cta {
