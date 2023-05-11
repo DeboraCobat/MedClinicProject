@@ -41,7 +41,7 @@ public class UserController {
 //        return "home";
 //    }
 
-    @GetMapping({ "/home"})
+    @GetMapping({"/", "/home"})
     public String showHome(Model model, HttpSession session, Principal principal) {
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
@@ -74,7 +74,7 @@ public class UserController {
     public String saveUser(@ModelAttribute("user") User user) {
         user.setRole(User.Role.patient);
         userRepo.save(user);
-        return "redirect:/home";
+        return "redirect:/";
     }
 
 
@@ -137,7 +137,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     @GetMapping("/profile")
