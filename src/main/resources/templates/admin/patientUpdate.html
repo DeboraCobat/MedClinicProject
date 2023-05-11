@@ -11,14 +11,16 @@
     <link rel="stylesheet" th:href="@{/css/plugins/bootstrap/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/plugins/icofont/icofont.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/plugins/slick-carousel/slick/slick.css}"/>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <!-- Navigation bar ------------------------------------>
 <header>
 
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <a class="navbar-brand" href="/admin/dashboard">Logo</a>
+        <a class="navbar-brand" th:href="@{/admin/dashboard}">
+            <img th:src="@{/../css/images/logotype.png}" alt="" class="logo-image">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,20 +30,19 @@
                     <a class="nav-link" href="/admin/doctorsList">Doctors</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/appointmentsList">Appointments</a>
+                    <a class="nav-link" href="/admin/patientsList">Patients</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/patientsList">Patients</a>
+                    <a class="nav-link" href="/admin/appointmentsList">Appointments</a>
                 </li>
             </ul>
         </div>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
-<!--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">-->
-<!--                    <img src="[avatar-url]" alt="Avatar" style="width: 25px; height: 25px; border-radius: 50%;">-->
-<!--                    Hello, <span th:text="${user.first_name}"></span>!-->
-<!--                </a>-->
-
+                <div th:if="${session.user != null}" class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="loggedInUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span th:text="${session.user.first_name}"></span>
+                    </a></div>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">View Profile</a>
                     <a class="dropdown-item" href="#">Log Out</a>
@@ -53,7 +54,7 @@
 </header>
 
 <div class="container my-4">
-    <h1 class="text-center">Update Patient Information</h1>
+    <h1 class="text-center">Update Patient Information</h1> </br>
     <form th:action="@{/patUpdate/{id}(id=${user.id})}" th:object="${user}" method="post">
         <input type="hidden" th:field="*{id}"/>
 

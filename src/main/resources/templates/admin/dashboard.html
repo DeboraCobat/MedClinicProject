@@ -14,16 +14,18 @@
 <body>
 <!-- Navigation bar ------------------------------------>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">Logo</a>
+    <a class="navbar-brand" th:href="@{/admin/dashboard}">
+        <img th:src="@{/../css/images/logotype.png}" alt="" class="logo-image">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                <!--        <img src="[avatar-url]" alt="Avatar" style="width: 25px; height: 25px; border-radius: 50%;">-->
-                Hello, [[${username}]]!
-            </a>
+            <div th:if="${session.user != null}" class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="loggedInUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span th:text="${session.user.first_name}"></span>
+                </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="#">View Profile</a>
                 <a class="dropdown-item" href="#">Log Out</a>
@@ -49,12 +51,12 @@
                         <a href="/admin/doctorsList" class="btn btn-main btn-round-full">Doctors</a>
                     </div>
 
-                    <div class="feature-item mb-5 mb-lg-0">
-                        <a href="/admin/appointmentsList" class="btn btn-main btn-round-full">Appointments</a>
-                    </div>
-
                     <div class="feature-item mb-10 mb-lg-0">
                         <a href="/admin/patientsList" class="btn btn-main btn-round-full">Patients</a>
+                    </div>
+
+                    <div class="feature-item mb-5 mb-lg-0">
+                        <a href="/admin/appointmentsList" class="btn btn-main btn-round-full">Appointments</a>
                     </div>
                 </div>
             </div>

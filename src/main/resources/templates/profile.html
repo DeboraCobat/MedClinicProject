@@ -29,6 +29,10 @@
         <div class="card-body">
           <h5 class="card-title">Calendar</h5>
           <div id="calendar"></div>
+          <span th:text="${user.first_name}"></span></h2>
+          <ul>
+            <li th:each="appointment : ${user.appointments}" th:text="${appointment.title} + ' - ' + ${appointment.time}"></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -68,20 +72,26 @@
   </div>
 </div>
 
+<script th:src="@{/js/script.js}"></script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('#calendar').fullCalendar({
-      // Calendar options and configurations
-      // Customize as per your requirements
-    });
-  });
-</script>
+
+
+<!--<script>-->
+<!--  $(document).ready(function() {-->
+<!--    $('#calendar').fullCalendar({-->
+<!--      // Calendar options and configurations-->
+<!--      // Customize as per your requirements-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->
+
+
 </br>
 <div th:replace="footer.html"></div>
 

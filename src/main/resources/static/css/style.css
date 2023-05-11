@@ -38,6 +38,11 @@ img {
     width: 160px;
     height: 50px;
 }
+.logo-image {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+}
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     font-family: "Exo", sans-serif;
@@ -801,3 +806,21 @@ label {
 }
 
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: lightgray;
+}
+
+td.selected {
+    background-color: lightblue;
+}
