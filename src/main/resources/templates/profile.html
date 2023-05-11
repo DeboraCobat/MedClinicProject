@@ -39,15 +39,13 @@
         <a href="/bookAppointment" type="button" class="btn btn-primary btn-sm mt-3 mb-3">
           Schedule Appointment
         </a>
-        <td>
-          <a href="#" class="btn btn-sm btn-primary">Edit</a>
-        </td>
         <tbody>
         <ul th:each="appointment: ${appointments}">
           Doctor: <li th:text="${appointment.doctor.first_name}"></li>
           Appointment: <li th:text="${#dates.format(appointment.appointmentTime, 'dd/MM/yyyy HH:mm')}"></li>
           Reason: <li th:text="${appointment.notes}"></li>
         </ul>
+        <a href="/deleteAppointment" class="btn btn-sm btn-danger">Delete</a>
         </tbody>
       </div>
     </div>

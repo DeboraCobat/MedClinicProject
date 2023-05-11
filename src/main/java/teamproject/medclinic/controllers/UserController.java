@@ -14,6 +14,9 @@ import teamproject.medclinic.entity.User;
 import teamproject.medclinic.repository.AppointmentRepo;
 import teamproject.medclinic.repository.UserRepo;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 
 import java.security.Principal;
 import java.util.List;
@@ -74,6 +77,9 @@ public class UserController {
         return "redirect:/";
     }
 
+
+
+
     @GetMapping("/login")
     public String showLoginForm() {
         return "login";
@@ -98,6 +104,35 @@ public class UserController {
 //            return "login";
 //        }
 //    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam("email") String email,
+                        @RequestParam("password") String password,
+                        HttpSession session,
+                        Model model) {
+        if (email == null || password == null) {
+            model.addAttribute("errorLogin", "Please provide both email and password");
+            return "login";
+        }
+
+        User user = userRepo.findByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            session.setAttribute("user", user);
+
+            if (user.getRole() == User.Role.patient) {
+                return "redirect:/profile";
+            } else if (user.getRole() == User.Role.doctor) {
+                return "redirect:/doctor/profileDoctor";
+            } else if (user.getRole() == User.Role.admin) {
+                return "redirect:/admin/dashboard";
+            }
+        }
+            model.addAttribute("error", "Invalid email or password");
+            return "login";
+
+    }
+
+
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -182,6 +217,37 @@ public class UserController {
         }
 
         userRepo.delete(user);
+
+        // Clear the session and redirect the user to the login page or any other appropriate page
+        session.invalidate();
+        return "redirect:/login";
+    }
+
+    @GetMapping("/deleteAppointment")
+    public String showDeleteAppointmentConfirmation(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            model.addAttribute("error", "You are not logged in");
+            return "login";
+        }
+        model.addAttribute("user", user);
+        return "deleteAppointment";
+    }
+
+    @PostMapping("/deleteAppointment")
+    public String deleteAppointment(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        // Retrieve the appointments associated with the user
+        List<Appointments> userAppointments = user.getAppointments();
+
+        if (!userAppointments.isEmpty()) {
+            // Delete the appointments
+            appointmentRepo.deleteAll(userAppointments);
+        }
 
         // Clear the session and redirect the user to the login page or any other appropriate page
         session.invalidate();

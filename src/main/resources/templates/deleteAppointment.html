@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delete Account</title>
+  <!-- Add Bootstrap CSS link here -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!--navbar-->
+<div th:replace="~{nav.html}"></div>
+
+<div class="container mt-5">
+  <h1>Delete Account</h1>
+  <p>Are you sure you want to cancel your appointment? </p>
+  <form method="post">
+    <input type="submit" name="delete" value="Delete Appointment" class="btn btn-danger">
+  </form>
+</div>

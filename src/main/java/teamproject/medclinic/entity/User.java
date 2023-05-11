@@ -50,8 +50,8 @@ public class User {
     @Email
     private String email;
 
-//    @NotBlank
-//    private String password;
+    @NotBlank
+    private String password;
 
     private String specialty;
 
@@ -64,8 +64,7 @@ public class User {
         male, female, other
     }
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     private List<Appointments> appointments;
-
 }
 

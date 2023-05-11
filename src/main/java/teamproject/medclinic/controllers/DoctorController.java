@@ -2,24 +2,26 @@ package teamproject.medclinic.controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.security.Principal;
+import java.util.*;
 
+import jakarta.servlet.http.HttpSession;
+//import org.springframework.ui.Model;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import org.springframework.web.servlet.ModelAndView;
 import teamproject.medclinic.entity.Appointments;
 import teamproject.medclinic.entity.MedicalRecord;
 import teamproject.medclinic.entity.User;
 import teamproject.medclinic.repository.AppointmentRepo;
 import teamproject.medclinic.repository.RecordRepo;
-import teamproject.medclinic.repository.RecordRepo;
 import teamproject.medclinic.repository.UserRepo;
+
+import static teamproject.medclinic.entity.User.Role.doctor;
 
 @Controller
 @RequestMapping("/doctor")
@@ -81,7 +83,52 @@ public class DoctorController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+
+    @GetMapping("/profileDoctor")
+    public String showProfile(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            model.addAttribute("error", "You are not logged in");
+            return "login";
+        }
+
+        if (user.getRole() == doctor) {
+            List<Appointments> appointments = appointmentRepo.findByDoctorId(user.getId());
+            model.addAttribute("appointments", appointments);
+            model.addAttribute("user", user);
+
+            List<User> patients = userRepo.findByRole(doctor);
+            model.addAttribute("patients", patients);
+
+            return "doctor/profile/profile";
+        }
+        return "login";
+    }
 }
+
+
+//    @GetMapping("/profile")
+//    public String showProfile(Model model, HttpSession session) {
+//        User user = (User) session.getAttribute("user");
+//        if (user == null) {
+//            model.addAttribute("error", "You are not logged in");
+//            return "login";
+//        }
+//
+//        if (user.getRole() == User.Role.doctor) {
+//            List<Appointments> appointments = appointmentRepo.findByDoctor(user);
+//            model.addAttribute("appointments", appointments);
+//            model.addAttribute("user", user);
+//
+//            return "doctor/profile/profile"; // Assuming you have a "doctorProfile.html" Thymeleaf template
+//        }
+//
+//        model.addAttribute("error", "You are not authorized to access this page");
+//        return "login";
+//    }
+
+
 
 //    }
 //
