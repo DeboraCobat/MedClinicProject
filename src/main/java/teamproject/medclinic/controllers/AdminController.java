@@ -122,13 +122,14 @@ public class AdminController {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         model.addAttribute("user", user);
-        return "admin/patientUpdate"; // Assuming this is the name of your Thymeleaf template file
+        return "admin/patientUpdate";
     }
 
-    @PostMapping("/patUpdate/{id}") // Updated the mapping URL to match the GetMapping
+    @PostMapping("/patUpdate/{id}")
     public String patUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         User existingPatient = userRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));;
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        ;
 
         existingPatient.setFirst_name(user.getFirst_name());
         existingPatient.setLast_name(user.getLast_name());
@@ -150,46 +151,4 @@ public class AdminController {
         userRepo.delete(user);
         return "redirect:/admin/patientsList";
     }
-
-//    //// APPOINTMENTS CRUD ////
-//    @GetMapping("/appointmentsList")
-//    public String appointmentsList(Model model) {
-//        List<Appointments> appointments = appointmentRepo.findAll();
-//        model.addAttribute("appointments", appointments);
-//        return "admin/appointmentsList";
-//    }
-//
-//    @GetMapping("/appointmentCreate")
-//    public String appointmentCreate(Model model) {
-//        model.addAttribute("appointment", new Appointments());
-//        return "admin/appointmentCreate";
-//    }
-//
-//    @PostMapping("/appointmentCreate")
-//    public String appointmentCreate(@ModelAttribute Appointments appointment) {
-//        appointmentRepo.save(appointment);
-//        return "redirect:/admin/appointmentsList";
-//    }
-//
-//    @GetMapping("/appointmentUpdate{id}")
-//    public String appointmentUpdate(@PathVariable("id") Long id, Model model) {
-//        Appointments appointment = appointmentRepo.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
-//        model.addAttribute("appointment", appointment);
-//        return "admin/appointmentUpdate";
-//    }
-//
-//    @PutMapping ("/appointmentsList{id}")
-//    public String appointmentUpdate(@PathVariable("id") Long id, @ModelAttribute Appointments appointment) {
-//        appointmentRepo.save(appointment);
-//        return "redirect:/admin/appointmentsList";
-//    }
-//
-//    @GetMapping("/appointmentDelete/{id}")
-//    public String appointmentDelete(@PathVariable("id") Long id) {
-//        Appointments appointment = appointmentRepo.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
-//        appointmentRepo.delete(appointment);
-//        return "redirect:/admin/appointmentsList";
-//    }
 }

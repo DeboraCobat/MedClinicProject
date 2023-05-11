@@ -69,8 +69,8 @@ public class AppointmentsController {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             model.addAttribute("errorBook", "Account required for scheduling.");
-            model.addAttribute("user", new User()); // Add this line to provide a User object to the template
-            return "register";
+            model.addAttribute("user", new User());
+            return "login";
         }
         List<User> doctors = userRepo.findByRole(User.Role.doctor);
         model.addAttribute("user", user);
@@ -83,19 +83,19 @@ public class AppointmentsController {
     public String bookAppointment(@ModelAttribute("appointment") Appointments appointment, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            return "redirect:/login"; // Redirect to login page if user is not logged in
+            return "redirect:/login";
         }
 
         User selectedDoctor = userRepo.findById(appointment.getDoctor().getId()).orElse(null);
         if (selectedDoctor == null || selectedDoctor.getRole() != User.Role.doctor) {
-            return "redirect:/bookAppointment"; // Redirect back to the bookAppointment page if the selected doctor is invalid
+            return "redirect:/bookAppointment";
         }
 
         appointment.setPatient(user);
         appointment.setDoctor(selectedDoctor);
         appointmentRepo.save(appointment);
 
-        return "redirect:/appointmentConfirmation"; // Redirect to appointments page or any other desired page
+        return "redirect:/appointmentConfirmation";
     }
 
     @GetMapping("/appointmentConfirmation")
