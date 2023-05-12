@@ -94,7 +94,7 @@
             <input type="password" class="form-control" id="password" th:field="*{password}"/>
         </div>
 
-        <form th:action="@{/admin/patUpdate/{id}(id=${user.id})}" method="post" th:object="${user}">
+        <form th:action="@{/admin/patUpdate/{id}(id=${user.id})}" method="put" th:object="${user}">
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
         <br/>
