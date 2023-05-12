@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import teamproject.medclinic.entity.Appointments;
 import teamproject.medclinic.entity.User;
 import teamproject.medclinic.repository.AppointmentRepo;
@@ -80,7 +81,7 @@ public class AppointmentsController {
     }
 
     @PostMapping("/bookAppointment")
-    public String bookAppointment(@ModelAttribute("appointment") Appointments appointment, HttpSession session) {
+    public String bookAppointment(@ModelAttribute("appointment") Appointments appointment, HttpSession session, RedirectAttributes redirectAttributes) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
@@ -95,7 +96,8 @@ public class AppointmentsController {
         appointment.setDoctor(selectedDoctor);
         appointmentRepo.save(appointment);
 
-        return "redirect:/appointmentConfirmation";
+        redirectAttributes.addFlashAttribute("book", "Appointment scheduled!");
+        return "redirect:/profile";
     }
 
     @GetMapping("/appointmentConfirmation")

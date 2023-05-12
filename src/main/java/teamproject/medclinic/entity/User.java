@@ -24,7 +24,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Role role;
 

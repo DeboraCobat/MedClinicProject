@@ -36,4 +36,5 @@ public class Appointments {
 
     @Column(columnDefinition = "TEXT")
     private String notes;
+
 }

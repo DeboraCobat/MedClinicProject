@@ -35,6 +35,10 @@
 
     </form>
 
+    <div th:if="${delete}" class="alert alert-danger mt-3">
+        <span th:text="${delete}"></span>
+    </div>
+
     <div th:if="${errorLogin}" class="alert alert-danger mt-3">
         <p th:text="${errorLogin}"></p>
     </div>

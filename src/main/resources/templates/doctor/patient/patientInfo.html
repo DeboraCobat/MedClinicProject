@@ -56,23 +56,23 @@
   </tr>
 </table>
 
-<script>
-  // Fetch patient information from the server
-  const patientId = 1; // Replace with the actual patient ID from your code
-  fetch(`/patient/patientInfo/${patientId}`)
-          .then(response => response.json())
-          .then(patient => {
-            // Update the HTML elements with patient information
-            document.getElementById("firstName").textContent = patient.first_name;
-            document.getElementById("lastName").textContent = patient.last_name;
-            document.getElementById("dateOfBirth").textContent = patient.date_of_birth;
-            document.getElementById("address").textContent = patient.address;
-            document.getElementById("phoneNumber").textContent = patient.phone_number;
-            document.getElementById("email").textContent = patient.email;
-          })
-          .catch(error => {
-            console.error(error);
-          });
-</script>
+<!--<script>-->
+<!--  // Fetch patient information from the server-->
+<!--  const patientId = 1; // Replace with the actual patient ID from your code-->
+<!--  fetch(`/patient/patientInfo/${patientId}`)-->
+<!--          .then(response => response.json())-->
+<!--          .then(patient => {-->
+<!--            // Update the HTML elements with patient information-->
+<!--            document.getElementById("firstName").textContent = patient.first_name;-->
+<!--            document.getElementById("lastName").textContent = patient.last_name;-->
+<!--            document.getElementById("dateOfBirth").textContent = patient.date_of_birth;-->
+<!--            document.getElementById("address").textContent = patient.address;-->
+<!--            document.getElementById("phoneNumber").textContent = patient.phone_number;-->
+<!--            document.getElementById("email").textContent = patient.email;-->
+<!--          })-->
+<!--          .catch(error => {-->
+<!--            console.error(error);-->
+<!--          });-->
+<!--</script>-->
 </body>
 </html>
