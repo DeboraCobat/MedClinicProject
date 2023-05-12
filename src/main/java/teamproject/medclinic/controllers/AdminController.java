@@ -139,6 +139,7 @@ public class AdminController {
         existingPatient.setAddress(user.getAddress());
         existingPatient.setPhone_number(user.getPhone_number());
         existingPatient.setEmail(user.getEmail());
+        existingPatient.setPassword(user.getPassword());
 
         userRepo.save(existingPatient);
 
