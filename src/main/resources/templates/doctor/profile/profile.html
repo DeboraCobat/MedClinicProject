@@ -43,6 +43,7 @@
                         <th>Patient</th>
                         <th>Date</th>
                         <th>Notes</th>
+<!--                        <th>Action</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -50,9 +51,9 @@
                         <td th:text="${appointment.patient.first_name} + ${appointment.patient.last_name}"></td>
                         <td th:text="${#dates.format(appointment.appointmentTime, 'dd/MM/yyyy HH:mm')}"></td>
                         <td th:text="${appointment.notes}"></td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                        </td>
+<!--                        <td>-->
+<!--                            <a href="#" class="btn btn-sm btn-primary">Edit</a>-->
+<!--                        </td>-->
                     </tr>
                     </tbody>
                 </table>

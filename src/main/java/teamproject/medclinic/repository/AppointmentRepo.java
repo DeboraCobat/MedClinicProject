@@ -24,11 +24,7 @@ public interface AppointmentRepo extends JpaRepository<Appointments, Long> {
 
     List<Appointments> findByDoctor(User doctor);
 
-//    List<Appointments> findByAppointmentTimeBetween(LocalTime startTime, LocalTime endTime);
-//
-//    List<Appointments> findByDoctorAndAppointmentDate(User doctor, LocalDate appointmentDate);
-//
-//    List<User> findAvailableDoctors(LocalDate appointmentDate, LocalTime startTime, LocalTime endTime);
+
 
 }
 
