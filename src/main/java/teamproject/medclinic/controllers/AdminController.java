@@ -66,7 +66,7 @@ public class AdminController {
         return "admin/doctorUpdate";
     }
 
-    @PostMapping("/docUpdate/{id}")
+    @PutMapping("/docUpdate/{id}")
     public String docUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         User existingDoctor = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
@@ -76,16 +76,16 @@ public class AdminController {
         existingDoctor.setPhone_number(user.getPhone_number());
         existingDoctor.setEmail(user.getEmail());
         existingDoctor.setSpecialty(user.getSpecialty());
+        existingDoctor.setPassword(user.getPassword());
 
         userRepo.save(existingDoctor);
 
         return "redirect:/admin/doctorsList";
     }
 
-
     // DOCTOR Delete Operation
     @RequestMapping("/doctorDelete/{id}")
-    public String doctorDelete(@PathVariable("id") Long id) {
+    public String deleteDoctor(@PathVariable("id") Long id) {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
         userRepo.delete(user);
@@ -153,65 +153,4 @@ public class AdminController {
         userRepo.delete(user);
         return "redirect:/admin/patientsList";
     }
-
-    ////CRUD FOR APPOINTMENTS////
-
-    // List ALL Operation
-
-//    @GetMapping("/appointmentsList")
-//    public String appointmentsList(Model model) {
-//        List<Appointments> appointments = appointmentRepo.findAll();
-//        model.addAttribute("appointments", appointments);
-//        return "admin/appointmentsList";
-//    }
-
-    // Create Operation
-//    @GetMapping("/appointmentCreate")
-//    public String appointmentCreate (Model model, HttpSession session) {
-//        User user = (User) session.getAttribute("user");
-//        if (user == null) {
-//            model.addAttribute("errorBook", "Account required for scheduling.");
-//            model.addAttribute("user", new User());
-//            return "admin/appointmentsList";
-//        }
-//        List<User> doctors = userRepo.findByRole(User.Role.doctor);
-//        model.addAttribute("user", user);
-//        model.addAttribute("appointment", new Appointments());
-//        model.addAttribute("doctors", doctors);
-//        return "admin/appointmentCreate";
-    }
-
-//    @PostMapping("/appointmentCreate")
-//    public String bookAppointment(@ModelAttribute("appointment") Appointments appointment, HttpSession session) {
-//        User user = (User) session.getAttribute("user");
-//        if (user == null) {
-//            return "redirect:admin/appointmentsList";
-//        }
-//
-//        User selectedDoctor = userRepo.findById(appointment.getDoctor().getId()).orElse(null);
-//        if (selectedDoctor == null || selectedDoctor.getRole() != User.Role.doctor) {
-//            return "redirect:/admin/appointmentCreate";
-//        }
-//
-//        appointment.setPatient(user);
-//        appointment.setDoctor(selectedDoctor);
-//        appointmentRepo.save(appointment);
-//
-//        return "redirect:admin/appointmentsList";
-//    }
-
-
-
-//
-//    @GetMapping("/appointmentCreate")
-//    public String appointmentCreate(Model model) {
-//        model.addAttribute("appointment", new Appointments());
-//        return "admin/appointmentCreate";
-//    }
-//
-//    @PostMapping("/appointmentCreate")
-//    public String appointmentCreate(@ModelAttribute Appointments appointment) {
-//        appointmentRepo.save(appointment);
-//        return "redirect:/admin/appointmentsList";
-//    }
-//
+}

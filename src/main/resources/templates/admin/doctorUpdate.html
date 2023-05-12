@@ -38,12 +38,11 @@
         </ul>
     </div>
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-            <div th:if="${session.user != null}" class="dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" id="loggedInUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Hello [[${session.user.first_name}]]!
-                </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+        <li class="nav-item dropdown" th:if="${session.user != null}">
+            <a class="nav-link dropdown-toggle" href="#" role="button" id="loggedInUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Hello [[${session.user.first_name}]]!
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="loggedInUser">
                 <a class="dropdown-item" href="/profile">View Profile</a>
                 <a class="dropdown-item" href="/logout">Log Out</a>
             </div>
@@ -52,7 +51,8 @@
 </nav>
 
 <div class="container my-4">
-    <h1 class="text-center">Update Doctor Information</h1> </br>
+    <h1 class="text-center">Update Doctor Information</h1>
+    <br/>
     <form th:action="@{/admin/doctorUpdate/{id}(id=${user.id})}" th:object="${user}" method="post">
         <input type="hidden" th:field="*{id}"/>
         <div class="form-group">
@@ -87,15 +87,21 @@
             <label for="specialty">Specialty:</label>
             <input type="text" class="form-control" id="specialty" th:field="*{specialty}"/>
         </div>
-        <form th:action="@{/admin/docUpdate/{id}(id=${user.id})}" method="post" th:object="${user}">
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
-        </br>
-        <form th:action="@{/admin/doctorDelete/{id}(id=${user.id}, source='doctor')}" method="get">
-            <input type="hidden" name="_method" value="delete">
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Choose Login Password"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+    <br/>
+    <form th:action="@{/admin/doctorDelete/{id}(id=${user.id}, source='doctor')}" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="btn btn-danger">Delete</button>
     </form>
 </div>
 </body>
 </html>
+
+
