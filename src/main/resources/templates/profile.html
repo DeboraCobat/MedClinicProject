@@ -9,7 +9,6 @@
   <link rel="stylesheet" th:href="@{/css/plugins/icofont/icofont.min.css}"/>
   <link rel="stylesheet" th:href="@{/css/plugins/slick-carousel/slick/slick.css}"/>
   <link rel="stylesheet" th:href="@{/css/style.css}"/>
-  <link rel="icon" type="image/png" th:href="@{/css/images/favicon.ico}" sizes="16x16">
   <title>Profile Page</title>
   <style>
     #calendar {
@@ -21,6 +20,23 @@
 
 <!-- Navigation bar ------------------------------------>
 <div th:replace="nav.html"></div>
+
+<!--Error messages-->
+<div class="container mt-4">
+  <div th:if="${editSuccess}" class="alert alert-success mt-3">
+    <p th:text="${editSuccess}"></p>
+  </div>
+  <div th:if="${errorMessage}" class="alert alert-danger mt-3">
+    <p th:text="${errorMessage}"></p>
+  </div>
+  <div th:if="${cancel}" class="alert alert-success mt-3">
+    <p th:text="${cancel}"></p>
+  </div>
+
+  <div th:if="${book}" class="alert alert-success mt-3">
+    <p th:text="${book}"></p>
+  </div>
+</div>
 
 <div class="container mt-4">
   <div class="row">
@@ -59,75 +75,96 @@
             <li>Doctor: <span th:text="${appointment.doctor.first_name}"></span></li>
             <li>Appointment: <span th:text="${#dates.format(appointment.appointmentTime, 'dd/MM/yyyy HH:mm')}"></span></li>
             <li>Reason: <span th:text="${appointment.notes}"></span></li>
+            <a th:href="@{/deleteAppointment/{id}(id=${appointment.id})}" class="btn btn-sm btn-danger">Cancel</a>
           </ul>
           </br>
-          <a href="/deleteAppointment" class="btn btn-sm btn-danger">Delete</a>
+          <form action="/logout" method="POST">
+            <button type="submit" class="btn btn-sm btn-secondary">Logout</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!--<script th:src="@{/js/script.js}"></script>-->
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 
+<!--ajax attempt-->
+<script>
+  $(document).ready(function() {
+    $.ajax({
+      url: '/profile',
+      method: 'GET',
+      success: function(data) {
+        const { appointments } = data;
+
+        $('.card-title span').text(appointments.first_name);
+        $('.card-text p span').eq(0).text(appointments.last_name);
+        $('.card-text p span').eq(1).text(appointments.date_of_birth);
+        $('.card-text p span').eq(2).text(appointments.gender);
+        $('.card-text p span').eq(3).text(appointments.address);
+        $('.card-text p span').eq(4).text(appointments.phone_number);
+        $('.card-text p span').eq(5).text(appointments.email);
+
+        if (appointments) {
+
+          $('#calendar').fullCalendar({
+
+
+            events: appointments.map(function(appointment) {
+              return {
+                title: 'Appointment',
+                start: appointment.appointmentTime
+              };
+            })
+          });
+        }
+      },
+      error: function(xhr, status, error) {
+        // Handle the error case
+        console.error(error);
+      }
+    });
+  });
+</script>
 
 <script>
   $(document).ready(function() {
     $('#calendar').fullCalendar({
-      // Calendar options and configurations
-      // Customize as per your requirements
+
+      events: [
+
+        {
+          title: 'Appointment 1',
+          start: '2023-05-12 10:00:00',
+
+        },
+        {
+          title: 'Appointment 2',
+          start: '2023-05-15 14:30:00',
+
+        },
+
+      ],
+
+      eventClick: function(calEvent, jsEvent, view) {
+
+        let popup = window.open('', 'Event Details', 'width=400,height=300');
+
+
+        let content = '<h3>' + calEvent.title + '</h3>' +
+                '<p>Start: ' + calEvent.start.format() + '</p>' +
+                '<p>End: ' + calEvent.end.format() + '</p>';
+
+        popup.document.write(content);
+      }
     });
   });
 </script>
-<!--<script>-->
-<!--  const calendar = document.getElementById("calendar");-->
-
-<!--  $(document).ready(function() {-->
-<!--    $('#calendar').fullCalendar({-->
-<!--      header: {-->
-<!--        left: 'prev,next today',-->
-<!--        center: 'title',-->
-<!--        right: 'month,agendaWeek,agendaDay'-->
-<!--      },-->
-<!--      defaultView: 'month',-->
-<!--      editable: false,-->
-<!--      eventLimit: true,-->
-<!--      events: function(start, end, timezone, callback) {-->
-
-<!--        $.ajax({-->
-<!--          url: '/admin/appointmentsList',-->
-<!--          type: 'GET',-->
-<!--          dataType: 'json',-->
-<!--          success: function(response) {-->
-<!--            var events = [];-->
-
-<!--            // Convert the response into FullCalendar event objects-->
-<!--            response.forEach(function(appointment) {-->
-<!--              events.push({-->
-<!--                title: 'Doctor: ' + appointment.doctor.firstName,-->
-<!--                start: appointment.appointmentTime,-->
-<!--                end: appointment.appointmentTime,-->
-<!--                reason: appointment.notes-->
-<!--              });-->
-<!--            });-->
-
-<!--            // Pass the events to the calendar-->
-<!--            callback(events);-->
-<!--          }-->
-<!--        });-->
-<!--      }-->
-<!--    });-->
-<!--  });-->
-<!--</script>-->
-
-
 
 </br>
 <div th:replace="footer.html"></div>

@@ -2,19 +2,24 @@ package teamproject.medclinic.controllers;
 
 import ch.qos.logback.core.LayoutBase;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import teamproject.medclinic.entity.Appointments;
 import teamproject.medclinic.entity.User;
 import teamproject.medclinic.repository.AppointmentRepo;
 import teamproject.medclinic.repository.UserRepo;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 
@@ -70,11 +75,19 @@ public class UserController {
         return mav;
     }
 
+
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user) {
-        user.setRole(User.Role.patient);
-        userRepo.save(user);
-        return "redirect:/";
+    public ModelAndView saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            ModelAndView mav = new ModelAndView("register");
+            mav.addObject("user", user);
+            return mav;
+        } else {
+            user.setRole(User.Role.patient);
+            userRepo.save(user);
+            redirectAttributes.addFlashAttribute("create", "Your account has been successfully created!");
+            return new ModelAndView("redirect:/");
+        }
     }
 
 
@@ -82,26 +95,6 @@ public class UserController {
     public String showLoginForm() {
         return "login";
     }
-
-//    @PostMapping("/login")
-//    public String login(@RequestParam("email") String email,
-//                        @RequestParam("password") String password,
-//                        HttpSession session,
-//                        Model model) {
-//        if (email == null || password == null) {
-//            model.addAttribute("errorLogin", "Please provide both email and password");
-//            return "login";
-//        }
-//
-//        User user = userRepo.findByEmail(email);
-//        if (user != null && user.getPassword().equals(password)) {
-//            session.setAttribute("user", user);
-//            return "redirect:/home";
-//        } else {
-//            model.addAttribute("error", "Invalid email or password");
-//            return "login";
-//        }
-//    }
 
     @PostMapping("/login")
     public String login(@RequestParam("email") String email,
@@ -132,9 +125,10 @@ public class UserController {
 
 
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    @PostMapping("/logout")
+    public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
         session.invalidate();
+        redirectAttributes.addFlashAttribute("logout", "Logged out");
         return "redirect:/";
     }
 
@@ -164,7 +158,7 @@ public class UserController {
 
 
     @PostMapping("/editProfile")
-    public String editProfile(@ModelAttribute("user") User updatedUser, HttpSession session) {
+    public String editProfile(@ModelAttribute("user") User updatedUser, HttpSession session, RedirectAttributes redirectAttributes) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
@@ -193,6 +187,7 @@ public class UserController {
         // Update the user object in the session with the updated values
         session.setAttribute("user", existingUser);
 
+        redirectAttributes.addFlashAttribute("editSuccess", "Account updated!");
         return "redirect:/profile";
     }
 
@@ -208,48 +203,72 @@ public class UserController {
     }
 
     @PostMapping("/deleteAccount")
-    public String deleteAccount(HttpSession session) {
+    public String deleteAccount(HttpSession session, RedirectAttributes redirectAttributes) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
         }
 
-        userRepo.delete(user);
+        try {
+            userRepo.delete(user);
 
-        // Clear the session and redirect the user to the login page or any other appropriate page
-        session.invalidate();
-        return "redirect:/login";
+            // Clear the session and redirect the user to the login page or any other appropriate page
+            session.invalidate();
+
+            redirectAttributes.addFlashAttribute("successMessage", "Your account has been successfully deleted.");
+            return "redirect:/login";
+        } catch (DataIntegrityViolationException ex) {
+            // Handle the constraint violation exception
+
+            redirectAttributes.addFlashAttribute("errorMessage", "Cannot delete the account due to associated appointments.");
+            return "redirect:/profile";
+        }
     }
 
-    @GetMapping("/deleteAppointment")
-    public String showDeleteAppointmentConfirmation(Model model, HttpSession session) {
+    @GetMapping("/deleteAppointment/{id}")
+    public String showDeleteAppointmentConfirmation(Model model, HttpSession session, @PathVariable("id") Long appointmentId) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             model.addAttribute("error", "You are not logged in");
             return "login";
         }
         model.addAttribute("user", user);
+        model.addAttribute("appointmentId", appointmentId);
         return "deleteAppointment";
     }
 
-    @PostMapping("/deleteAppointment")
-    public String deleteAppointment(HttpSession session) {
+    @PostMapping("/deleteAppointment/{id}")
+    public String deleteAppointment(@PathVariable("id") Long appointmentId, HttpSession session, RedirectAttributes redirectAttributes) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
         }
 
-        // Retrieve the appointments associated with the user
-        List<Appointments> userAppointments = user.getAppointments();
+        // Retrieve the user's appointments from the database
+        List<Appointments> userAppointments = appointmentRepo.findByPatientId(user.getId());
 
-        if (!userAppointments.isEmpty()) {
-            // Delete the appointments
-            appointmentRepo.deleteAll(userAppointments);
+        // Find the appointment with the matching ID
+        Appointments appointmentToDelete = null;
+        for (Appointments appointment : userAppointments) {
+            if (appointment.getId().equals(appointmentId)) {
+                appointmentToDelete = appointment;
+                break;
+            }
         }
 
-        // Clear the session and redirect the user to the login page or any other appropriate page
-        session.invalidate();
-        return "redirect:/login";
+        if (appointmentToDelete != null) {
+            // Delete the appointment
+            appointmentRepo.delete(appointmentToDelete);
+
+            // Remove the appointment from the user's list
+            userAppointments.remove(appointmentToDelete);
+
+            redirectAttributes.addFlashAttribute("cancel", "Appointment canceled");
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "Appointment not found");
+        }
+
+        return "redirect:/profile";
     }
 
 }
