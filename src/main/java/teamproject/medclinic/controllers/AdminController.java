@@ -127,7 +127,7 @@ public class AdminController {
         return "admin/patientUpdate";
     }
 
-    @PostMapping("/patUpdate/{id}")
+    @PutMapping("/patUpdate/{id}")
     public String patUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         User existingPatient = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
