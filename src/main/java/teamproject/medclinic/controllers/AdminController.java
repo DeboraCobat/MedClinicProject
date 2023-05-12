@@ -66,7 +66,7 @@ public class AdminController {
         return "admin/doctorUpdate";
     }
 
-    @PutMapping("/docUpdate/{id}")
+    @PostMapping("/docUpdate/{id}")
     public String docUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         User existingDoctor = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
