@@ -56,7 +56,7 @@
 
 <div class="container my-4">
     <h1 class="text-center">Update Patient Information</h1> </br>
-    <form th:action="@{/patUpdate/{id}(id=${user.id})}" th:object="${user}" method="post">
+    <form th:action="@{/admin/patUpdate/{id}(id=${user.id})}" th:object="${user}" method="post">
         <input type="hidden" th:field="*{id}"/>
 
         <div class="form-group">
@@ -94,10 +94,10 @@
             <input type="password" class="form-control" id="password" th:field="*{password}"/>
         </div>
 
-          <form th:action="@{/admin/patUpdate/{id}(id=${user.id})}" method="post" th:object="${user}">
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
-        <br/>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+
+    <br/>
         <form th:action="@{/admin/patientDelete/{id}(id=${user.id}, source='patient')}" method="post">
             <input type="hidden" name="_method" value="delete">
             <button type="submit" class="btn btn-danger">Delete</button>
