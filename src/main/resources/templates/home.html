@@ -19,6 +19,15 @@
 
 <div th:replace="nav.html"></div>
 
+<div class="container mt-4">
+    <div th:if="${logout}" class="alert alert-success mt-3">
+        <p th:text="${logout}"></p>
+    </div>
+    <div th:if="${create}" class="alert alert-success mt-3">
+        <span th:text="${create}"></span>
+    </div>
+</div>
+
 <!-- BANNER  -->
 
 <section class="banner">
