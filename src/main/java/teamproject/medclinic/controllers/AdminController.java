@@ -67,25 +67,48 @@ public class AdminController {
     }
 
     @PostMapping("/docUpdate/{id}")
-    public String docUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
-        User existingDoctor = userRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        existingDoctor.setFirst_name(user.getFirst_name());
-        existingDoctor.setLast_name(user.getLast_name());
-        existingDoctor.setAddress(user.getAddress());
-        existingDoctor.setPhone_number(user.getPhone_number());
-        existingDoctor.setEmail(user.getEmail());
-        existingDoctor.setSpecialty(user.getSpecialty());
+//    public String docUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
+//        User existingDoctor = userRepo.findById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+//        existingDoctor.setFirst_name(user.getFirst_name());
+//        existingDoctor.setLast_name(user.getLast_name());
+//        existingDoctor.setAddress(user.getAddress());
+//        existingDoctor.setPhone_number(user.getPhone_number());
+//        existingDoctor.setEmail(user.getEmail());
+//        existingDoctor.setSpecialty(user.getSpecialty());
+//
+//        userRepo.save(existingDoctor);
+//
+//        return "redirect:/admin/doctorsList";
+//    }
+//
+    public String docUpdate(@ModelAttribute("user") User updatedUser, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/admin/doctorsList";
+        }
+        User existingUser = userRepo.findById(user.getId()).orElse(null);
+        if (existingUser == null) {
+            return "redirect:/admin/doctorsList";
+        }
 
-        userRepo.save(existingDoctor);
+        existingUser.setFirst_name(updatedUser.getFirst_name());
+        existingUser.setLast_name(updatedUser.getLast_name());
+        existingUser.setDate_of_birth(updatedUser.getDate_of_birth());
+        existingUser.setAddress(updatedUser.getAddress());
+        existingUser.setPhone_number(updatedUser.getPhone_number());
+        existingUser.setEmail(updatedUser.getEmail());
+        existingUser.setPassword(updatedUser.getPassword());
+        existingUser.setGender(updatedUser.getGender());
+        userRepo.save(existingUser);
+        session.setAttribute("user", existingUser);
 
         return "redirect:/admin/doctorsList";
     }
 
-
     // DOCTOR Delete Operation
     @RequestMapping("/doctorDelete/{id}")
-    public String doctorDelete(@PathVariable("id") Long id) {
+    public String deleteDoctor(@PathVariable("id") Long id) {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
         userRepo.delete(user);
