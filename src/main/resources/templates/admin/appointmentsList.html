@@ -43,6 +43,7 @@
                 <a class="nav-link dropdown-toggle" href="#" role="button" id="loggedInUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Hello [[${session.user.first_name}]]!
                 </a>
+            </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="/profile">View Profile</a>
                 <a class="dropdown-item" href="/logout">Log Out</a>
@@ -84,7 +85,9 @@
             <td th:text="${#dates.format(appointment.appointmentTime, 'dd/MM/yyyy HH:mm')}"></td>
             <td th:text="${appointment.notes}"></td>
             <td>
-                <a href="#" class="btn btn-sm btn-primary">Edit</a>
+                <form th:action="@{/admin/appointmentDelete/{id}(id=${appointment.id})}" method="get">
+                    <button type="submit" class="btn btn-danger">Cancel</button>
+                </form>
             </td>
         </tr>
         </tbody>
@@ -93,4 +96,5 @@
 
 </nav>
 </div>
------------------------------------->
+</body>
+

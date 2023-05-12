@@ -31,8 +31,17 @@ public class AppointmentsController {
     }
 
     @GetMapping("/admin/appointmentCreate")
-    public String appointmentCreate(Model model) {
+    public String appointmentCreate(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            model.addAttribute("errorBook", "Account required for scheduling.");
+            model.addAttribute("user", new User());
+            return "login";
+        }
+        List<User> doctors = userRepo.findByRole(User.Role.doctor);
+        model.addAttribute("user", user);
         model.addAttribute("appointment", new Appointments());
+        model.addAttribute("doctors", doctors);
         return "admin/appointmentCreate";
     }
 
@@ -41,28 +50,47 @@ public class AppointmentsController {
         appointmentRepo.save(appointment);
         return "redirect:/admin/appointmentsList";
     }
+//
+//    @GetMapping("/admin/appointmentUpdate/{id}")
+//    public String appointmentUpdate(@PathVariable("id") Long id, Model model) {
+//        Appointments appointment = appointmentRepo.findById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
+//        model.addAttribute("appointment", appointment);
+//        return "admin/appointmentUpdate";
+//    }
+//
+//    @PostMapping("/admin/appointmentUpdate/{id}")
+//    public String appointmentUpdate(@PathVariable("id") Long id, @ModelAttribute("appointment") Appointments updatedAppointment) {
+//        Appointments existingAppointment = appointmentRepo.findById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
+//
+//        existingAppointment.setPatient(updatedAppointment.getPatient());
+//        existingAppointment.setDoctor(updatedAppointment.getDoctor());
+//        existingAppointment.setAppointmentTime(updatedAppointment.getAppointmentTime());
+//        existingAppointment.setNotes(updatedAppointment.getNotes());
+//
+//        appointmentRepo.save(existingAppointment);
+//        return "redirect:/admin/appointmentsList";
+//    }
 
-    @GetMapping("/admin/appointmentUpdate{id}")
-    public String appointmentUpdate(@PathVariable("id") Long id, Model model) {
-        Appointments appointment = appointmentRepo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
-        model.addAttribute("appointment", appointment);
-        return "admin/appointmentUpdate";
-    }
 
-    @PutMapping ("/admin/appointmentsList{id}")
-    public String appointmentUpdate(@PathVariable("id") Long id, @ModelAttribute Appointments appointment) {
-        appointmentRepo.save(appointment);
-        return "redirect:/admin/appointmentsList";
-    }
+//    @GetMapping("/admin/appointmentDelete/{id}")
+//    public String appointmentDelete(@PathVariable("id") Long id) {
+//        Appointments appointment = appointmentRepo.findById(id)
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
+//        appointmentRepo.delete(appointment);
+//        return "redirect:/admin/appointmentsList";
+//    }
 
-    @GetMapping("/admin/appointmentDelete/{id}")
+    @RequestMapping ("/admin/appointmentDelete/{id}")
     public String appointmentDelete(@PathVariable("id") Long id) {
         Appointments appointment = appointmentRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid appointment id: " + id));
         appointmentRepo.delete(appointment);
         return "redirect:/admin/appointmentsList";
     }
+
+
 
     @GetMapping("/bookAppointment")
     public String showBookAppointmentPage(Model model, HttpSession session) {

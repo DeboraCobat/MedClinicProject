@@ -66,42 +66,19 @@ public class AdminController {
         return "admin/doctorUpdate";
     }
 
-    @PostMapping("/docUpdate/{id}")
-//    public String docUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
-//        User existingDoctor = userRepo.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-//        existingDoctor.setFirst_name(user.getFirst_name());
-//        existingDoctor.setLast_name(user.getLast_name());
-//        existingDoctor.setAddress(user.getAddress());
-//        existingDoctor.setPhone_number(user.getPhone_number());
-//        existingDoctor.setEmail(user.getEmail());
-//        existingDoctor.setSpecialty(user.getSpecialty());
-//
-//        userRepo.save(existingDoctor);
-//
-//        return "redirect:/admin/doctorsList";
-//    }
-//
-    public String docUpdate(@ModelAttribute("user") User updatedUser, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/admin/doctorsList";
-        }
-        User existingUser = userRepo.findById(user.getId()).orElse(null);
-        if (existingUser == null) {
-            return "redirect:/admin/doctorsList";
-        }
+    @PutMapping("/docUpdate/{id}")
+    public String docUpdate(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
+        User existingDoctor = userRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        existingDoctor.setFirst_name(user.getFirst_name());
+        existingDoctor.setLast_name(user.getLast_name());
+        existingDoctor.setAddress(user.getAddress());
+        existingDoctor.setPhone_number(user.getPhone_number());
+        existingDoctor.setEmail(user.getEmail());
+        existingDoctor.setSpecialty(user.getSpecialty());
+        existingDoctor.setPassword(user.getPassword());
 
-        existingUser.setFirst_name(updatedUser.getFirst_name());
-        existingUser.setLast_name(updatedUser.getLast_name());
-        existingUser.setDate_of_birth(updatedUser.getDate_of_birth());
-        existingUser.setAddress(updatedUser.getAddress());
-        existingUser.setPhone_number(updatedUser.getPhone_number());
-        existingUser.setEmail(updatedUser.getEmail());
-        existingUser.setPassword(updatedUser.getPassword());
-        existingUser.setGender(updatedUser.getGender());
-        userRepo.save(existingUser);
-        session.setAttribute("user", existingUser);
+        userRepo.save(existingDoctor);
 
         return "redirect:/admin/doctorsList";
     }
@@ -176,21 +153,22 @@ public class AdminController {
         userRepo.delete(user);
         return "redirect:/admin/patientsList";
     }
+}
 
     ////CRUD FOR APPOINTMENTS////
 
-    // List ALL Operation
-
+//    // List ALL Operation
+//
 //    @GetMapping("/appointmentsList")
 //    public String appointmentsList(Model model) {
 //        List<Appointments> appointments = appointmentRepo.findAll();
 //        model.addAttribute("appointments", appointments);
 //        return "admin/appointmentsList";
 //    }
-
-    // Create Operation
+//
+//    // Create Operation
 //    @GetMapping("/appointmentCreate")
-//    public String appointmentCreate (Model model, HttpSession session) {
+//    public String appointmentCreate(Model model, HttpSession session) {
 //        User user = (User) session.getAttribute("user");
 //        if (user == null) {
 //            model.addAttribute("errorBook", "Account required for scheduling.");
@@ -202,9 +180,9 @@ public class AdminController {
 //        model.addAttribute("appointment", new Appointments());
 //        model.addAttribute("doctors", doctors);
 //        return "admin/appointmentCreate";
-    }
-
-//    @PostMapping("/appointmentCreate")
+//    }
+//
+//    //    @PostMapping("/appointmentCreate")
 //    public String bookAppointment(@ModelAttribute("appointment") Appointments appointment, HttpSession session) {
 //        User user = (User) session.getAttribute("user");
 //        if (user == null) {
@@ -222,19 +200,30 @@ public class AdminController {
 //
 //        return "redirect:admin/appointmentsList";
 //    }
-
-
-
 //
-//    @GetMapping("/appointmentCreate")
-//    public String appointmentCreate(Model model) {
-//        model.addAttribute("appointment", new Appointments());
-//        return "admin/appointmentCreate";
+//
+////
+////    @GetMapping("/appointmentCreate")
+////    public String appointmentCreate(Model model) {
+////        model.addAttribute("appointment", new Appointments());
+////        return "admin/appointmentCreate";
+////    }
+////
+////    @PostMapping("/appointmentCreate")
+////    public String appointmentCreate(@ModelAttribute Appointments appointment) {
+////        appointmentRepo.save(appointment);
+////        return "redirect:/admin/appointmentsList";
+////    }
+////
+//
+//    @GetMapping("/deleteAppointment")
+//    public String deleteAppointment(Model model, HttpSession session) {
+//        User user = (User) session.getAttribute("user");
+//        if (user == null) {
+//            model.addAttribute("error", "You are not logged in");
+//            return "login";
+//        }
+//        model.addAttribute("user", user);
+//        return "deleteAppointment";
 //    }
-//
-//    @PostMapping("/appointmentCreate")
-//    public String appointmentCreate(@ModelAttribute Appointments appointment) {
-//        appointmentRepo.save(appointment);
-//        return "redirect:/admin/appointmentsList";
-//    }
-//
+//}
